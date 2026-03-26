@@ -1202,6 +1202,18 @@ function toggleDay(id) {
   const body = document.getElementById('body-' + id);
   const toggle = document.getElementById('toggle-' + id);
   const isOpen = body.classList.contains('open');
+
+  // Cerrar todos los demás días
+  ['d1','d2','d3','d4','d5','d6'].forEach(function(d) {
+    if (d !== id) {
+      const b = document.getElementById('body-' + d);
+      const t = document.getElementById('toggle-' + d);
+      if (b) { b.classList.remove('open'); b.style.display = 'none'; }
+      if (t) { t.classList.remove('open'); }
+    }
+  });
+
+  // Abrir o cerrar el clickado
   body.classList.toggle('open', !isOpen);
   body.style.display = isOpen ? 'none' : 'block';
   toggle.classList.toggle('open', !isOpen);
