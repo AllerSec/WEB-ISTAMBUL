@@ -303,6 +303,37 @@
     padding: 2rem; border-top: 1px solid var(--sand2);
   }
 
+  /* ── ACCORDION ── */
+  .acc-list { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
+  .acc-item {
+    background: #fff;
+    border: 1px solid var(--sand2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .acc-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .85rem 1rem;
+    cursor: pointer;
+    font-size: 13.5px; font-weight: 500;
+    user-select: none;
+    gap: .5rem;
+  }
+  .acc-head:hover { background: var(--sand); }
+  .acc-arrow { font-size: 16px; color: var(--warm); transition: transform .2s; flex-shrink: 0; }
+  .acc-head.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body {
+    display: none;
+    padding: .85rem 1rem 1rem;
+    font-size: 13px; color: var(--ink2);
+    line-height: 1.65;
+    border-top: 1px solid var(--sand2);
+  }
+  .acc-body.open { display: block; }
+  .check-ol { padding-left: 1.4rem; display: flex; flex-direction: column; gap: .4rem; }
+  .check-ol li { font-size: 13px; color: var(--ink2); }
+  .checklist-alerts { margin-bottom: .75rem; }
+
   /* ── MOBILE ── */
   @media (max-width: 640px) {
     body { font-size: 14px; }
@@ -399,56 +430,61 @@
 <section class="section" id="antes">
   <div class="section-header">
     <span class="section-label">Imprescindible</span>
-    <h2 class="section-title">Antes de comprar el primer kebab</h2>
+    <h2 class="section-title">Antes de volar</h2>
   </div>
 
-  <div class="alert critical">
-    <span class="alert-icon">🛂</span>
-    <div class="alert-body">
-      <div class="alert-title">Visado: comprobad vuestra nacionalidad PRIMERO</div>
-      La mayoría de ciudadanos de la UE entran a Turquía <strong>sin visado</strong> con DNI o pasaporte (hasta 90 días). Sin embargo, algunas nacionalidades sí necesitan e-Visa (~50 USD/persona en <a href="https://www.evisa.gov.tr" target="_blank" style="color:inherit">evisa.gov.tr</a>). Comprobad cada uno vuestro caso en el sitio oficial del Ministerio de Exteriores turco antes de nada.
+  <!-- Alertas compactas siempre visibles -->
+  <div class="checklist-alerts">
+    <div class="alert critical" style="margin-bottom:.6rem">
+      <span class="alert-icon">🛂</span>
+      <div class="alert-body"><strong>Visado:</strong> La mayoría UE entran sin visado con DNI. Algunas nacionalidades necesitan e-Visa (~50 USD en <a href="https://www.evisa.gov.tr" target="_blank" style="color:inherit">evisa.gov.tr</a>). Comprobad cada uno.</div>
     </div>
-  </div>
-
-  <div class="alert warning">
-    <span class="alert-icon">📅</span>
-    <div class="alert-body">
-      <div class="alert-title">Semana Santa: reservad TODO con antelación</div>
-      Vuestras fechas (9–14 abril 2026) caen en plena Semana Santa. Estambul y Göreme estarán a tope de turistas. Los hostales en Göreme se agotan con semanas de antelación y los precios suben un 30–50%. No dejéis nada para el último momento.
+    <div class="alert warning" style="margin-bottom:.6rem">
+      <span class="alert-icon">📅</span>
+      <div class="alert-body"><strong>Semana Santa:</strong> Fechas 9–14 abril — todo a tope. Los hostales de Göreme se agotan semanas antes. Reservad YA.</div>
     </div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="info-card-title">📋 Lista de reservas obligatorias</div>
-      <p>
-        <strong>1.</strong> Hostal en Estambul (3 noches)<br>
-        <strong>2.</strong> Bus nocturno Estambul → Göreme (21:50h del 12 abril) — reservad en <a href="https://www.obilet.com" target="_blank">obilet.com</a> o <a href="https://www.flixbus.com" target="_blank">FlixBus</a><br>
-        <strong>3.</strong> Hostal cueva en Göreme (1 noche)<br>
-        <strong>4.</strong> Shuttle Göreme → Kayseri Airport (reservad al llegar al hostal el día 13)<br>
-        <strong>5.</strong> Quads en Göreme (negociad en bloque por los 9)
-      </p>
+  <!-- Acordeones compactos -->
+  <div class="acc-list">
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>📋 Lista de reservas obligatorias</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        <ol class="check-ol">
+          <li>Hostal en Estambul (3 noches)</li>
+          <li>Bus nocturno Estambul → Göreme (21:50h del 12 abril) — <a href="https://www.obilet.com" target="_blank">obilet.com</a> o FlixBus</li>
+          <li>Hostal cueva en Göreme (1 noche)</li>
+          <li>Shuttle Göreme → Kayseri Airport (reservad al llegar al hostal)</li>
+          <li>Quads en Göreme (negociad en bloque por los 9)</li>
+        </ol>
+      </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-title">💳 Dinero y moneda</div>
-      <p>
-        Moneda: <strong>Lira turca (TRY)</strong>. Con la inflación turca, los precios en euros son muy baratos para los europeos.<br><br>
-        Usad <strong>Revolut o N26</strong> para sacar TRY en cajeros sin comisión. Evitad las casas de cambio del aeropuerto y de Sultanahmet (robo legal). Los mejores tipos de cambio: cajeros Akbank, Yapı Kredi o Garanti.
-      </p>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>💳 Dinero y moneda</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        Moneda: <strong>Lira turca (TRY)</strong>. Usad <strong>Revolut o N26</strong> para sacar TRY en cajeros sin comisión. Evitad las casas de cambio del aeropuerto y Sultanahmet. Mejores cajeros: Akbank, Yapı Kredi, Garanti.
+      </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-title">📱 Datos móviles</div>
-      <p>
-        Opción A: <strong>eSIM turca</strong> (Airalo, Holafly) — compradla antes del vuelo. ~8–12€ por 7 días de datos.<br><br>
-        Opción B: SIM física en el aeropuerto Sabiha Gökçen (Turkcell, Vodafone TR). Cuesta ~15–20€ con 15–20 GB. Para 9, con 3–4 eSIMs compartiéis hotspot.
-      </p>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>📱 Datos móviles</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        <strong>Opción A:</strong> eSIM turca (Airalo, Holafly) antes del vuelo — ~8–12€ / 7 días.<br>
+        <strong>Opción B:</strong> SIM física en SAW (Turkcell, Vodafone TR) ~15–20€ con 15–20 GB. Con 3–4 eSIMs compartís hotspot para los 9.
+      </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-title">🎫 IstanbulKart</div>
-      <p>
-        Comprad <strong>3–4 tarjetas IstanbulKart</strong> para los 9 (en las máquinas del metro o en kioscos de la calle). Se recargan con TRY. Sirve para metro, tranvía, bus y ferry.<br><br>
-        Truco: se puede pasar la misma tarjeta varias veces seguidas, pero esperando ~20 segundos entre usos. Con 4 tarjetas vais sobrados.
-      </p>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🎫 IstanbulKart</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        Comprad <strong>3–4 tarjetas</strong> para los 9 (máquinas de metro o kioscos). Sirve para metro, tranvía, bus y ferry. Truco: se puede pasar la misma tarjeta varias veces esperando ~20 segundos entre usos.
+      </div>
     </div>
   </div>
 </section>
@@ -457,33 +493,29 @@
 <section class="section" id="alojamiento">
   <div class="section-header">
     <span class="section-label">Dónde dormir</span>
-    <h2 class="section-title">Alojamiento recomendado</h2>
+    <h2 class="section-title">Alojamiento</h2>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card" style="border-left: 3px solid var(--teal);">
-      <div class="info-card-title">🕌 Estambul — 3 noches (9, 10, 11 abril)</div>
-      <p>
-        <strong>Zona: Karaköy / Beyoğlu</strong><br><br>
-        La mejor zona para vuestro perfil. Estáis en el corazón moderno de Estambul, a 15 min del tranvía T1 hacia Sultanahmet, rodeados de bares y a pie del puerto para los ferries.<br><br>
-        <strong>Hostales recomendados:</strong><br>
-        • <em>Urban Hostel Istanbul</em> (Beyoğlu) — muy social<br>
-        • <em>Cheers Hostel</em> (Sultanahmet) — si preferís la zona histórica<br>
-        • <em>Istanbul Mia Hostel</em> — terraza con vistas<br><br>
-        Buscad en Hostelworld o Booking. Para 9 personas, considerad alquilar un piso entero en Airbnb en Karaköy — suele salir más barato y tenéis cocina.
-      </p>
+  <div class="acc-list">
+    <div class="acc-item" style="border-left:3px solid var(--teal)">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🕌 Estambul — 3 noches (9, 10, 11 abril)</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        <strong>Zona recomendada: Karaköy / Beyoğlu</strong> — corazón moderno, a 15 min del tranvía hacia Sultanahmet, rodeados de bares y cerca del puerto para ferries.<br><br>
+        <strong>Hostales:</strong> Urban Hostel Istanbul (muy social) · Cheers Hostel (zona histórica) · Istanbul Mia Hostel (terraza con vistas)<br><br>
+        Para 9 personas valorad un <strong>piso entero en Airbnb</strong> en Karaköy — suele salir más barato y tenéis cocina.
+      </div>
     </div>
-    <div class="info-card" style="border-left: 3px solid var(--warm);">
-      <div class="info-card-title">🏔️ Göreme — 1 noche (13 abril)</div>
-      <p>
-        <strong>Zona: Centro de Göreme</strong><br><br>
-        Göreme es pequeño — todo está a 5–10 min andando. Lo fundamental es que el hostal tenga terraza con vistas para ver los globos al amanecer.<br><br>
-        <strong>Hostales cueva recomendados:</strong><br>
-        • <em>Kamelya Cave Hostel</em> — desayuno turco incluido, terraza con globos<br>
-        • <em>Homestay Cave Hostel</em> — ambiente mochilero, muy social<br>
-        • <em>Hostel Terra Vista</em> — terraza espectacular, precio muy bajo<br><br>
-        ⚠️ Solo tenéis 1 noche. Reservad con meses de antelación en Semana Santa. Para los 9, valorad una habitación privada grande o 2 habitaciones.
-      </p>
+    <div class="acc-item" style="border-left:3px solid var(--warm)">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🏔️ Göreme — 1 noche (13 abril)</span><span class="acc-arrow">▾</span>
+      </div>
+      <div class="acc-body">
+        Göreme es pequeño — todo a 5–10 min andando. Buscad hostal con <strong>terraza para ver los globos al amanecer</strong>.<br><br>
+        <strong>Hostales cueva:</strong> Kamelya Cave (desayuno incluido + terraza) · Homestay Cave (muy social) · Hostel Terra Vista (terraza espectacular, precio bajo)<br><br>
+        <span style="color:var(--warn)">⚠️ Solo 1 noche — reservad con meses de antelación en Semana Santa.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -499,9 +531,9 @@
           <div class="day-date">Jueves 9 Abril — llegada desde Viena</div>
         </div>
       </div>
-      <div class="day-toggle open" id="toggle-d1">▾</div>
+      <div class="day-toggle" id="toggle-d1">▾</div>
     </div>
-    <div class="day-body open" id="body-d1">
+    <div class="day-body" id="body-d1" style="display:none">
 
       <div class="alert info" style="margin-bottom:1rem;">
         <span class="alert-icon">✈</span>
@@ -1219,16 +1251,38 @@ function toggleDay(id) {
   toggle.classList.toggle('open', !isOpen);
 }
 function navTo(btn, id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Si es un día, abrirlo automáticamente
+  const dayMap = { dia1:'d1', dia2:'d2', dia3:'d3', dia4:'d4', dia5:'d5', dia6:'d6' };
+  if (dayMap[id]) {
+    const dayId = dayMap[id];
+    // Cerrar todos
+    ['d1','d2','d3','d4','d5','d6'].forEach(function(d) {
+      const b = document.getElementById('body-' + d);
+      const t = document.getElementById('toggle-' + d);
+      if (b) { b.classList.remove('open'); b.style.display = 'none'; }
+      if (t) { t.classList.remove('open'); }
+    });
+    // Abrir el seleccionado
+    const body = document.getElementById('body-' + dayId);
+    const toggle = document.getElementById('toggle-' + dayId);
+    if (body) { body.classList.add('open'); body.style.display = 'block'; }
+    if (toggle) { toggle.classList.add('open'); }
+  }
+  // Scroll y nav activo
+  setTimeout(function() {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
-// Open day 1 by default, close others
-['d2','d3','d4','d5','d6'].forEach(id => {
-  const b = document.getElementById('body-' + id);
-  if (b) { b.style.display = 'none'; b.classList.remove('open'); }
-});
+function toggleAcc(head) {
+  const body = head.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  head.classList.toggle('open', !isOpen);
+}
+// All days closed by default
 </script>
 
 </body>
