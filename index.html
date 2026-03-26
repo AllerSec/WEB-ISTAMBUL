@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itinerario Erasmus — Estambul & Capadocia · Abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --ink2: #3d2f22;
+    --warm: #c8622a;
+    --warm2: #e8935a;
+    --sand: #f5efe6;
+    --sand2: #ede3d6;
+    --cream: #faf7f2;
+    --teal: #2a6b6e;
+    --teal2: #4a9b9e;
+    --gold: #c9922a;
+    --night: #1b2c3e;
+    --ok: #2e7d52;
+    --warn: #c47a1a;
+    --err: #b03020;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 3.5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,98,42,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--warm2);
+    border: 1px solid rgba(200,98,42,0.4);
+    border-radius: 2px;
+    padding: 3px 10px;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: .6rem;
+  }
+  .hero h1 span { color: var(--warm2); font-style: italic; }
+  .hero-sub {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    margin-bottom: 2rem;
+  }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .pill {
+    font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: 99px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    background: none; border: none; cursor: pointer;
+    padding: .75rem 1.1rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--warm2);
+    border-bottom-color: var(--warm2);
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 3rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 1.5px solid var(--sand2);
+  }
+  .section-label {
+    font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--warm); opacity: .7;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: 6px;
+    padding: .85rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 13.5px;
+    display: flex; gap: .75rem; align-items: flex-start;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert-body { flex: 1; }
+  .alert-title { font-weight: 500; margin-bottom: .15rem; }
+  .alert.critical { background: #fef0ed; border-left: 3px solid var(--err); color: #6b1a10; }
+  .alert.warning  { background: #fef8ed; border-left: 3px solid var(--warn); color: #614010; }
+  .alert.info     { background: #eef6f8; border-left: 3px solid var(--teal); color: #1a4548; }
+  .alert.ok       { background: #edf7f2; border-left: 3px solid var(--ok); color: #1a4530; }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    background: #fff;
+    border: 1px solid var(--sand2);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .day-head {
+    background: var(--ink);
+    color: #fff;
+    padding: .9rem 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-head-left { display: flex; align-items: center; gap: .75rem; }
+  .day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--warm2);
+    line-height: 1;
+  }
+  .day-info { }
+  .day-title { font-size: 14px; font-weight: 500; color: #fff; }
+  .day-date { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .day-toggle {
+    font-size: 18px; color: rgba(255,255,255,0.5);
+    transition: transform .25s;
+  }
+  .day-toggle.open { transform: rotate(180deg); }
+  .day-body { padding: 1.25rem; display: none; }
+  .day-body.open { display: block; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; }
+  .tl-item {
+    display: flex; gap: 1rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-left {
+    display: flex; flex-direction: column; align-items: center;
+    flex-shrink: 0; width: 52px;
+  }
+  .tl-time {
+    font-size: 11px; font-weight: 500; color: var(--warm);
+    text-align: center; line-height: 1.2;
+    background: var(--sand);
+    border: 1px solid var(--sand2);
+    border-radius: 4px;
+    padding: 2px 5px;
+    white-space: nowrap;
+  }
+  .tl-line {
+    width: 1.5px; background: var(--sand2);
+    flex: 1; margin-top: 4px; min-height: 16px;
+  }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-content { flex: 1; padding-top: 1px; }
+  .tl-title {
+    font-size: 14px; font-weight: 500;
+    color: var(--ink); margin-bottom: .2rem;
+  }
+  .tl-desc {
+    font-size: 13px; color: var(--ink2);
+    line-height: 1.6;
+  }
+  .tl-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+  .tag {
+    font-size: 11px; padding: 1px 7px; border-radius: 99px;
+    background: var(--sand); color: var(--ink2);
+    border: 1px solid var(--sand2);
+  }
+  .tag.eat  { background: #fef0e6; color: #7a3e15; border-color: #f5cba8; }
+  .tag.move { background: #e6f0fe; color: #15357a; border-color: #a8c5f5; }
+  .tag.see  { background: #e6fef2; color: #155a30; border-color: #a8f5cc; }
+  .tag.night{ background: #f0e6fe; color: #451580; border-color: #cba8f5; }
+  .tag.tip  { background: #fefce6; color: #6b5a10; border-color: #f5e8a8; }
+  .tag.bus  { background: #e6f8fe; color: #155070; border-color: #a8e5f5; }
+
+  /* ── TIP BOX ── */
+  .tip-box {
+    background: var(--sand);
+    border: 1px solid var(--sand2);
+    border-radius: 8px;
+    padding: .85rem 1rem;
+    font-size: 13px;
+    margin-top: .75rem;
+    display: flex; gap: .6rem; align-items: flex-start;
+  }
+  .tip-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+
+  /* ── INFO GRID ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--sand2);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .info-card-title {
+    font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--warm); margin-bottom: .5rem;
+  }
+  .info-card p {
+    font-size: 13px; color: var(--ink2); line-height: 1.6;
+  }
+  .info-card strong { color: var(--ink); font-weight: 500; }
+
+  /* ── COST TABLE ── */
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cost-table th {
+    text-align: left; padding: .5rem .75rem;
+    font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--warm); border-bottom: 1.5px solid var(--sand2);
+  }
+  .cost-table td { padding: .5rem .75rem; border-bottom: 1px solid var(--sand); }
+  .cost-table tr:last-child td { border-bottom: none; font-weight: 500; color: var(--ink); }
+  .cost-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .cost-wrap {
+    background: #fff; border: 1px solid var(--sand2);
+    border-radius: 8px; overflow: hidden; margin-bottom: 1rem;
+  }
+
+  /* ── TRAPS ── */
+  .trap-list { display: flex; flex-direction: column; gap: .75rem; }
+  .trap {
+    background: #fff; border: 1px solid var(--sand2); border-radius: 8px;
+    padding: .85rem 1rem; font-size: 13px;
+    display: flex; gap: .75rem; align-items: flex-start;
+  }
+  .trap-badge {
+    flex-shrink: 0; font-size: 10px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .08em;
+    padding: 2px 7px; border-radius: 3px;
+    margin-top: 1px;
+    background: #fef0ed; color: var(--err);
+    border: 1px solid rgba(176,48,32,0.2);
+  }
+
+  /* ── APPS ── */
+  .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75rem; }
+  .app-card {
+    background: #fff; border: 1px solid var(--sand2); border-radius: 8px;
+    padding: .85rem 1rem;
+  }
+  .app-name { font-size: 13px; font-weight: 500; margin-bottom: .2rem; }
+  .app-desc { font-size: 12px; color: var(--ink2); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; font-size: 12px; color: rgba(26,20,16,0.4);
+    padding: 2rem; border-top: 1px solid var(--sand2);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    body { font-size: 14px; }
+
+    .hero { padding: 2rem 1rem 1.75rem; }
+    .hero h1 { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+    .hero-sub { font-size: 13px; }
+    .pill { font-size: 11px; padding: 3px 10px; }
+
+    .nav-btn { font-size: 11px; padding: .65rem .85rem; }
+
+    .main { padding: 1.5rem .9rem 3rem; }
+
+    .section-title { font-size: 1.15rem; }
+    .section-header { gap: .6rem; margin-bottom: 1rem; }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .app-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .tl-left { width: 40px; }
+    .tl-time { font-size: 10px; padding: 2px 4px; }
+    .tl-title { font-size: 13px; }
+    .tl-desc { font-size: 12px; }
+
+    .day-head { padding: .75rem 1rem; }
+    .day-num { font-size: 1.25rem; }
+    .day-title { font-size: 13px; }
+    .day-date { font-size: 11px; }
+    .day-body { padding: 1rem; }
+
+    .alert { font-size: 12.5px; padding: .75rem .85rem; }
+
+    /* Tabla de costes — scroll horizontal en móvil */
+    .cost-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .cost-table { min-width: 340px; }
+    .cost-table th, .cost-table td { padding: .45rem .6rem; font-size: 12px; }
+
+    .trap { flex-direction: column; gap: .4rem; }
+    .trap-badge { align-self: flex-start; }
+
+    .tip-box { font-size: 12px; padding: .75rem .85rem; }
+    .footer { font-size: 11px; padding: 1.5rem 1rem; }
+  }
+
+  @media (max-width: 380px) {
+    .app-grid { grid-template-columns: 1fr; }
+    .hero-pills { gap: .35rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Itinerario Erasmus · 9 personas</div>
+    <h1>Estambul <span>&</span> Capadocia</h1>
+    <div class="hero-sub">9 – 14 Abril 2026 · Presupuesto bajo · Versión corregida y verificada</div>
+    <div class="hero-pills">
+      <span class="pill">✈ Viena → Estambul (SAW)</span>
+      <span class="pill">🚌 Bus nocturno → Göreme</span>
+      <span class="pill">✈ Kayseri → Viena</span>
+      <span class="pill">6 días · 5 noches</span>
+      <span class="pill">Semana Santa — reservad YA</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="scrollTo('antes')">Antes de volar</button>
+    <button class="nav-btn" onclick="scrollTo('alojamiento')">Dónde dormir</button>
+    <button class="nav-btn" onclick="scrollTo('dia1')">Día 1</button>
+    <button class="nav-btn" onclick="scrollTo('dia2')">Día 2</button>
+    <button class="nav-btn" onclick="scrollTo('dia3')">Día 3</button>
+    <button class="nav-btn" onclick="scrollTo('dia4')">Día 4</button>
+    <button class="nav-btn" onclick="scrollTo('dia5')">Día 5</button>
+    <button class="nav-btn" onclick="scrollTo('dia6')">Día 6</button>
+    <button class="nav-btn" onclick="scrollTo('presupuesto')">Presupuesto</button>
+    <button class="nav-btn" onclick="scrollTo('trampas')">Trampas</button>
+    <button class="nav-btn" onclick="scrollTo('apps')">Apps</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ═══ ANTES DE VOLAR ═══ -->
+<section class="section" id="antes">
+  <div class="section-header">
+    <span class="section-label">Imprescindible</span>
+    <h2 class="section-title">Antes de comprar el primer kebab</h2>
+  </div>
+
+  <div class="alert critical">
+    <span class="alert-icon">🛂</span>
+    <div class="alert-body">
+      <div class="alert-title">Visado: comprobad vuestra nacionalidad PRIMERO</div>
+      La mayoría de ciudadanos de la UE entran a Turquía <strong>sin visado</strong> con DNI o pasaporte (hasta 90 días). Sin embargo, algunas nacionalidades sí necesitan e-Visa (~50 USD/persona en <a href="https://www.evisa.gov.tr" target="_blank" style="color:inherit">evisa.gov.tr</a>). Comprobad cada uno vuestro caso en el sitio oficial del Ministerio de Exteriores turco antes de nada.
+    </div>
+  </div>
+
+  <div class="alert warning">
+    <span class="alert-icon">📅</span>
+    <div class="alert-body">
+      <div class="alert-title">Semana Santa: reservad TODO con antelación</div>
+      Vuestras fechas (9–14 abril 2026) caen en plena Semana Santa. Estambul y Göreme estarán a tope de turistas. Los hostales en Göreme se agotan con semanas de antelación y los precios suben un 30–50%. No dejéis nada para el último momento.
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-title">📋 Lista de reservas obligatorias</div>
+      <p>
+        <strong>1.</strong> Hostal en Estambul (3 noches)<br>
+        <strong>2.</strong> Bus nocturno Estambul → Göreme (21:50h del 12 abril) — reservad en <a href="https://www.obilet.com" target="_blank">obilet.com</a> o <a href="https://www.flixbus.com" target="_blank">FlixBus</a><br>
+        <strong>3.</strong> Hostal cueva en Göreme (1 noche)<br>
+        <strong>4.</strong> Shuttle Göreme → Kayseri Airport (reservad al llegar al hostal el día 13)<br>
+        <strong>5.</strong> Quads en Göreme (negociad en bloque por los 9)
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">💳 Dinero y moneda</div>
+      <p>
+        Moneda: <strong>Lira turca (TRY)</strong>. Con la inflación turca, los precios en euros son muy baratos para los europeos.<br><br>
+        Usad <strong>Revolut o N26</strong> para sacar TRY en cajeros sin comisión. Evitad las casas de cambio del aeropuerto y de Sultanahmet (robo legal). Los mejores tipos de cambio: cajeros Akbank, Yapı Kredi o Garanti.
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">📱 Datos móviles</div>
+      <p>
+        Opción A: <strong>eSIM turca</strong> (Airalo, Holafly) — compradla antes del vuelo. ~8–12€ por 7 días de datos.<br><br>
+        Opción B: SIM física en el aeropuerto Sabiha Gökçen (Turkcell, Vodafone TR). Cuesta ~15–20€ con 15–20 GB. Para 9, con 3–4 eSIMs compartiéis hotspot.
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🎫 IstanbulKart</div>
+      <p>
+        Comprad <strong>3–4 tarjetas IstanbulKart</strong> para los 9 (en las máquinas del metro o en kioscos de la calle). Se recargan con TRY. Sirve para metro, tranvía, bus y ferry.<br><br>
+        Truco: se puede pasar la misma tarjeta varias veces seguidas, pero esperando ~20 segundos entre usos. Con 4 tarjetas vais sobrados.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ALOJAMIENTO ═══ -->
+<section class="section" id="alojamiento">
+  <div class="section-header">
+    <span class="section-label">Dónde dormir</span>
+    <h2 class="section-title">Alojamiento recomendado</h2>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card" style="border-left: 3px solid var(--teal);">
+      <div class="info-card-title">🕌 Estambul — 3 noches (9, 10, 11 abril)</div>
+      <p>
+        <strong>Zona: Karaköy / Beyoğlu</strong><br><br>
+        La mejor zona para vuestro perfil. Estáis en el corazón moderno de Estambul, a 15 min del tranvía T1 hacia Sultanahmet, rodeados de bares y a pie del puerto para los ferries.<br><br>
+        <strong>Hostales recomendados:</strong><br>
+        • <em>Urban Hostel Istanbul</em> (Beyoğlu) — muy social<br>
+        • <em>Cheers Hostel</em> (Sultanahmet) — si preferís la zona histórica<br>
+        • <em>Istanbul Mia Hostel</em> — terraza con vistas<br><br>
+        Buscad en Hostelworld o Booking. Para 9 personas, considerad alquilar un piso entero en Airbnb en Karaköy — suele salir más barato y tenéis cocina.
+      </p>
+    </div>
+    <div class="info-card" style="border-left: 3px solid var(--warm);">
+      <div class="info-card-title">🏔️ Göreme — 1 noche (13 abril)</div>
+      <p>
+        <strong>Zona: Centro de Göreme</strong><br><br>
+        Göreme es pequeño — todo está a 5–10 min andando. Lo fundamental es que el hostal tenga terraza con vistas para ver los globos al amanecer.<br><br>
+        <strong>Hostales cueva recomendados:</strong><br>
+        • <em>Kamelya Cave Hostel</em> — desayuno turco incluido, terraza con globos<br>
+        • <em>Homestay Cave Hostel</em> — ambiente mochilero, muy social<br>
+        • <em>Hostel Terra Vista</em> — terraza espectacular, precio muy bajo<br><br>
+        ⚠️ Solo tenéis 1 noche. Reservad con meses de antelación en Semana Santa. Para los 9, valorad una habitación privada grande o 2 habitaciones.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 1 ═══ -->
+<section class="section" id="dia1">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d1')">
+      <div class="day-head-left">
+        <div class="day-num">01</div>
+        <div class="day-info">
+          <div class="day-title">Aterrizaje y primera noche europea</div>
+          <div class="day-date">Jueves 9 Abril — llegada desde Viena</div>
+        </div>
+      </div>
+      <div class="day-toggle open" id="toggle-d1">▾</div>
+    </div>
+    <div class="day-body open" id="body-d1">
+
+      <div class="alert info" style="margin-bottom:1rem;">
+        <span class="alert-icon">✈</span>
+        <div class="alert-body">
+          Vuelo PC906 sale de Viena a las 10:35. Llegada estimada a Sabiha Gökçen (SAW) alrededor de las 14:15–14:30 hora local (Turquía = UTC+3, 2h más que Europa Central en abril). SAW está en el lado asiático, a 45–90 min del centro según tráfico.
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Llegada a Sabiha Gökçen (SAW)</div>
+            <div class="tl-desc">Inmigración, recogida de maletas, cambio de dinero (solo lo justo para el bus, ~50 TRY). Comprad la eSIM o SIM aquí si no la tenéis.</div>
+            <div class="tl-tags"><span class="tag move">Aeropuerto SAW</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">15:15</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Bus Havabus SAW → Taksim</div>
+            <div class="tl-desc">Salid por la puerta 9 o 13 de llegadas y coged el <strong>Havabus directo a Taksim</strong> (~7€ por persona). Sale cada 30 min. Trayecto: 70–110 min según tráfico. Es el transporte más cómodo para 9 con maletas — hay portaequipajes. Alternativa: metro M4 a Kadıköy + ferry a Eminönü (más barato, 1h45 con transbordos, mejor sin maletas grandes).</div>
+            <div class="tl-tags"><span class="tag move">Havabus ~7€/persona</span><span class="tag tip">70–110 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Check-in hostal en Karaköy/Beyoğlu</div>
+            <div class="tl-desc">Dejad maletas, duchas rápidas. Organizaos en grupos (9 personas moviéndose en bloque es lento — mejor dividirse en 2 subgrupos coordinados).</div>
+            <div class="tl-tags"><span class="tag">15 min andando desde Taksim</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:45</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Paseo por İstiklal Caddesi → Torre Gálata</div>
+            <div class="tl-desc">La gran avenida peatonal de Beyoğlu: 1,5 km de tiendas, música callejera y gente. Bajad hasta la <strong>Torre Gálata</strong> (no hace falta subir, se ve perfecta desde fuera). Por el camino comprad un <em>Simit</em> (rosquilla de sésamo, ~0,30€) en cualquier carrito callejero.</div>
+            <div class="tl-tags"><span class="tag see">İstiklal Caddesi</span><span class="tag see">Torre Gálata</span><span class="tag eat">Simit 0,30€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">19:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Cena de llegada — Beyoğlu</div>
+            <div class="tl-desc">Id a la zona de <strong>Meşrutiyet Caddesi</strong> o a <strong>Dürümzade</strong> (cerca de Taksim, famoso por sus dürüms/kebabs, colas pero vale la pena). Presupuesto: 4–6€ por persona con bebida.</div>
+            <div class="tl-tags"><span class="tag eat">Cena 4–6€</span><span class="tag">Dürümzade</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">21:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Primera noche: Nevizade Sokak y Asmalımescit</div>
+            <div class="tl-desc">Dos callejuelas adyacentes en Beyoğlu con bares de tapas en la calle, mesas en la acera y cervezas Efes a buen precio. Ambiente turco auténtico — ni demasiado turístico ni demasiado local. Ideal para la primera noche: accesible desde el hostal andando.</div>
+            <div class="tl-tags"><span class="tag night">Nevizade Sokak</span><span class="tag night">Asmalımescit</span><span class="tag">Cerveza Efes ~2€</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <span><strong>Tip del día:</strong> Si llegáis con mucho retraso o el tráfico está fatal, considerad taxi compartido desde SAW directamente al hostal: ~3–4 taxis para 9 personas, ~15€/taxi. Sale a menos de 7€/persona y os ahorra tiempo.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 2 ═══ -->
+<section class="section" id="dia2">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d2')">
+      <div class="day-head-left">
+        <div class="day-num">02</div>
+        <div class="day-info">
+          <div class="day-title">La Estambul histórica + el Bósforo</div>
+          <div class="day-date">Viernes 10 Abril</div>
+        </div>
+      </div>
+      <div class="day-toggle" id="toggle-d2">▾</div>
+    </div>
+    <div class="day-body" id="body-d2">
+
+      <div class="alert warning" style="margin-bottom:1rem;">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-body">
+          <strong>Semana Santa:</strong> La Mezquita Azul y Ayasofya tendrán colas enormes. Salid antes de las 09:00 para evitar la peor parte. Las 9 personas juntas en cola son más lentas — designad a una persona que gestione el grupo.
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">08:45</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Desayuno turco rápido</div>
+            <div class="tl-desc">Cafetería cerca del hostal. Pedid <em>menemen</em> (huevos revueltos con tomate y pimiento, ~4€) o simplemente simit con çay (té turco). No hagáis un desayuno sentado de 1h — hoy hay mucho que ver.</div>
+            <div class="tl-tags"><span class="tag eat">Menemen ~4€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">09:15</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Tranvía T1 → Sultanahmet (20 min)</div>
+            <div class="tl-desc">Coged el tranvía T1 desde Karaköy o Kabataş hasta la parada Sultanahmet. Usad la IstanbulKart.</div>
+            <div class="tl-tags"><span class="tag move">Tranvía T1 ~0,40€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">09:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Mezquita Azul (Sultan Ahmet Camii) — GRATIS</div>
+            <div class="tl-desc">La entrada es gratuita. Cubrid hombros y piernas (hay pañuelos en la entrada). Tiempo dentro: 30–40 min. Las 6 minaretes desde fuera son igual de impresionantes — si la cola es larguísima, valorad verla desde la plaza y entrar a Ayasofya.</div>
+            <div class="tl-tags"><span class="tag see">Mezquita Azul</span><span class="tag ok">Gratis</span><span class="tag">30–45 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Ayasofya (Santa Sofía) — entrada de pago</div>
+            <div class="tl-desc">Es mezquita activa desde 2020. Entrada: ~25–30€ por persona (verificad precio actualizado en la taquilla o en la web oficial). Para 9 personas son ~225–270€ en total — decidid en grupo si vale la pena o la véis desde fuera (que también impresiona). Si entráis: 45–60 min.</div>
+            <div class="tl-tags"><span class="tag see">Ayasofya</span><span class="tag warn">~25–30€/persona</span><span class="tag">45–60 min</span></div>
+            <div class="tip-box" style="margin-top:.5rem;">
+              <span class="tip-icon">💡</span>
+              <span><strong>Alternativa gratis:</strong> La Mezquita de Süleymaniye (10 min andando) es igual de impresionante, completamente gratis y tiene unas vistas del Cuerno de Oro brutales. Muchos viajeros la prefieren a Ayasofya.</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">11:45</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Cisterna Basílica (Yerebatan Sarnıcı)</div>
+            <div class="tl-desc">A 2 min andando de Ayasofya. Una cisterna subterránea del siglo VI con columnas iluminadas y música ambiente — parece una película. Entrada: ~12€. Tiempo: 45 min. Reservad entrada online para saltaros la cola.</div>
+            <div class="tl-tags"><span class="tag see">Cisterna Basílica</span><span class="tag">~12€</span><span class="tag">45 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">13:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Comida en Sirkeci — barata y local</div>
+            <div class="tl-desc">Bajad andando 10 min hacia Sirkeci. Buscad los restaurantes de la <strong>calle Hocapaşa Sokak</strong> — lahmacun (la pizza turca, ~1,5€), pide (pan relleno, ~3€) o köfte (albóndigas, ~5€). Evitad los restaurantes con foto-menú en Sultanahmet: cobran el doble.</div>
+            <div class="tl-tags"><span class="tag eat">Comida 4–6€</span><span class="tag">Lahmacun, Pide, Köfte</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:15</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Gran Bazar (Kapalıçarşı) — solo a curiosear</div>
+            <div class="tl-desc">El bazar cubierto más grande del mundo: 4.000 tiendas. Id solo a curiosear y perderos 30–45 min. <strong>No compréis nada aquí si no sois expertos en regatear</strong> — los precios iniciales son 2–3x el valor real. Para regalos: Bazar de las Especias (siguiente parada) es mejor.</div>
+            <div class="tl-tags"><span class="tag see">Gran Bazar</span><span class="tag warn">No compréis aquí</span><span class="tag">30–45 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">15:15</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Bazar de las Especias (Mısır Çarşısı)</div>
+            <div class="tl-desc">A 10 min andando por callejuelas llenas de especias, frutos secos, lokum (Turkish delight) y té. Mucho más auténtico que el Gran Bazar. Aquí sí podéis comprar souvenirs a buen precio — regatead sin miedo (ofertad el 50% del precio pedido).</div>
+            <div class="tl-tags"><span class="tag see">Bazar de las Especias</span><span class="tag eat">Lokum, frutos secos</span><span class="tag">30 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">16:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Ferry del Bósforo LOW-COST ⭐</div>
+            <div class="tl-desc">Bajad al muelle de <strong>Eminönü</strong> y coged el ferry público de <strong>Şehir Hatları</strong> con la IstanbulKart (~0,80€). Los ferrys de la compañía Turyol van hasta Üsküdar (lado asiático). El trayecto dura 20–30 min y tenéis vistas del Bósforo, el palacio de Topkapı y la silueta de la ciudad. <strong>No paguéis los "tours del Bósforo" de los tipos que gritan en el muelle — son caros y este ferry hace lo mismo.</strong></div>
+            <div class="tl-tags"><span class="tag move">Ferry público ~0,80€</span><span class="tag see">Vistas del Bósforo</span><span class="tag ok">El mejor low-cost del viaje</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Balık Ekmek en Eminönü 🐟</div>
+            <div class="tl-desc">Al volver del ferry, comprad un <em>Balık Ekmek</em> en los barcos amarillos anclados en el muelle — bocadillo de caballa a la plancha con lechuga, cebolla y limón, ~2€. Es uno de los rituales gastronómicos más míticos de Estambul. Comed sentados en los escalones mirando el Bósforo.</div>
+            <div class="tl-tags"><span class="tag eat">Balık Ekmek ~2€</span><span class="tag tip">Ritual obligatorio</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Vuelta al hostal + relax</div>
+            <div class="tl-desc">Hoy ha sido el día más intenso. Descansad 1–1,5h antes de la noche.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">20:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Noche en Kadıköy (lado asiático) 🎉</div>
+            <div class="tl-desc">Cruzad en ferry desde Eminönü o Kabataş a <strong>Kadıköy</strong> (~0,80€). Es el barrio universitario/hipster por excelencia: la cerveza es más barata, el ambiente es joven y alternativo, y la gente es local de verdad. Id a la zona de <strong>Kadife Sokak</strong> (la "calle de los bares") — barras en la acera, música en vivo, mezcla de turcos y guiris.<br><br>
+            ⚠️ <strong>Atención al regreso:</strong> El último ferry regular a las ~23:30–00:30. Si os quedáis hasta tarde, lo más barato es compartir 2–3 taxis amarillos o usar BiTaksi. Con 9 personas: 3 taxis × ~10–12€ = ~3–4€/persona.</div>
+            <div class="tl-tags"><span class="tag night">Kadife Sokak</span><span class="tag move">Ferry ~0,80€</span><span class="tag">Cerveza Efes ~1,5–2€</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 3 ═══ -->
+<section class="section" id="dia3">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d3')">
+      <div class="day-head-left">
+        <div class="day-num">03</div>
+        <div class="day-info">
+          <div class="day-title">Ortaköy, Cihangir y los rooftops</div>
+          <div class="day-date">Sábado 11 Abril — día más relajado</div>
+        </div>
+      </div>
+      <div class="day-toggle" id="toggle-d3">▾</div>
+    </div>
+    <div class="day-body" id="body-d3">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Desayuno turco largo (Kahvaltı) ⭐</div>
+            <div class="tl-desc">El desayuno turco completo es una experiencia: 15–20 platitos con quesos, aceitunas, tomate, huevos, miel, mermeladas, pan y çay ilimitado. <strong>Van Kahvaltı Evi</strong> (en Cihangir) es el más famoso. Para 9 personas necesitaréis reserva o llegar pronto — ~10–12€/persona pero os llena para todo el día.</div>
+            <div class="tl-tags"><span class="tag eat">Kahvaltı ~10–12€</span><span class="tag tip">Experiencia cultural</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">12:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Barrio de Cihangir — callejeo libre</div>
+            <div class="tl-desc">El barrio más bohemio de Estambul. Calles empinadas con gatos por todas partes, librerías de segunda mano, cafeterías de especialidad y galerías de arte. <strong>Mermaid Stairs</strong> (escaleras decoradas) — buen foto-spot.</div>
+            <div class="tl-tags"><span class="tag see">Cihangir</span><span class="tag">45 min</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">13:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Bus/tranvía a Ortaköy (30 min)</div>
+            <div class="tl-desc">Coged el autobús 22 o 22E desde Kabataş a Ortaköy. O taxi compartido (~5€ para los 9 en 2 taxis).</div>
+            <div class="tl-tags"><span class="tag move">Bus 22/22E con IstanbulKart</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Kumpir en Ortaköy 🥔</div>
+            <div class="tl-desc">El ritual de Ortaköy: una patata asada gigante que rellenáis con todo lo que queréis (mantequilla, queso, maíz, aceitunas, etc.). ~3–4€. Comed sentados en la plaza con la <strong>Mezquita de Ortaköy y el Puente del Bósforo</strong> de fondo. Es una de las postales más bonitas de Estambul y completamente gratis (excepto la patata).</div>
+            <div class="tl-tags"><span class="tag eat">Kumpir 3–4€</span><span class="tag see">Mezquita Ortaköy + puente</span><span class="tag tip">Foto obligatoria</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">15:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Tarde libre en Karaköy</div>
+            <div class="tl-desc">Volved a Karaköy (bus 22 en sentido contrario). Este barrio tiene el mejor ambiente de café-bar de Estambul: graffitis, tiendas vintage, shisha en terrazas. <strong>Osmanlı Kahvesi</strong> para un çay turco mirando el Cuerno de Oro. Sin prisas.</div>
+            <div class="tl-tags"><span class="tag see">Karaköy</span><span class="tag eat">Çay ~0,50€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Atardecer en Rooftop ⭐</div>
+            <div class="tl-desc">Hay varios rooftops con vistas brutales al Cuerno de Oro desde Beyoğlu. <strong>Monkey Istanbul</strong> o <strong>360 Istanbul</strong> son los más conocidos. Los cócteles cuestan ~8–12€ pero la vista (sol poniéndose sobre Sultanahmet y el Bósforo) no tiene precio. Reservad mesa si vais los 9.</div>
+            <div class="tl-tags"><span class="tag see">Vistas al Cuerno de Oro</span><span class="tag night">Cóctel ~8–12€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">20:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Cena + fiesta en Karaköy</div>
+            <div class="tl-desc">Cena en la zona de Karaköy (mezze compartidos: hummus, cacık, börek... ~6–8€/persona). Luego clubs de música electrónica en Karaköy: <strong>Indigo</strong>, <strong>Arkaoda</strong> (más indie) o los bares de <strong>Taksim</strong> para pub-hopping.</div>
+            <div class="tl-tags"><span class="tag eat">Cena 6–8€</span><span class="tag night">Indigo / Arkaoda</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <span><strong>Tip local:</strong> Si queréis evitar los rooftops de pago, subid a la <strong>colina de Galata</strong> al atardecer y tenéis las mismas vistas gratis desde los callejones que rodean la torre.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 4 ═══ -->
+<section class="section" id="dia4">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d4')">
+      <div class="day-head-left">
+        <div class="day-num">04</div>
+        <div class="day-info">
+          <div class="day-title">Balat, Pierre Loti y el bus a Capadocia</div>
+          <div class="day-date">Domingo 12 Abril — última noche en Europa</div>
+        </div>
+      </div>
+      <div class="alert" style="margin:.75rem .75rem 0; font-size:12px; background:#fef8ed; border-left:3px solid var(--warn); color:#614010; border-radius:4px; padding:.5rem .75rem; display:block;">
+        ⚠️ Hoy cogeréis el bus a las 21:50 desde <strong>Esenler Otogar</strong>. Planificad bien el horario para estar en la estación antes de las 21:00.
+      </div>
+      <div class="day-toggle" id="toggle-d4">▾</div>
+    </div>
+    <div class="day-body" id="body-d4">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Check-out hostal + consigna de equipaje</div>
+            <div class="tl-desc">Haced el check-out y dejad las maletas en la consigna del hostal (normalmente gratis o ~2€). Viajaréis ligeros todo el día y recogeréis el equipaje antes de coger el bus.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Barrios de Balat y Fener ⭐</div>
+            <div class="tl-desc">Los antiguos barrios judío y griego de Estambul son lo más fotogénico e instagrameable de la ciudad. Casas de colores, calles empinadas, gatos por todos lados, cafeterías vintage y tiendas de segunda mano. Completamente fuera de las rutas turísticas estándar. Coged el tranvía T1 hasta Eminönü y luego bus hasta Balat (20 min total).<br><br>
+            Imprescindibles: <em>Balat Merdivenler</em> (escaleras coloridas), la <em>Iglesia de los Búlgaros</em> (hierro forjado único en el mundo), el <em>Mercadillo de Balat</em>.</div>
+            <div class="tl-tags"><span class="tag see">Balat + Fener</span><span class="tag tip">Joya escondida</span><span class="tag">2 horas</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">13:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Comida en Balat — súper barata</div>
+            <div class="tl-desc"><strong>Forno Balat</strong> para lahmacun (pizza turca con carne picada especiada, ~1,5€) o cualquier lokanta (restaurante obrero) de la zona. Presupuesto: 3–5€ con bebida. Evitad los restaurantes de Sultanahmet — aquí coméis como locales.</div>
+            <div class="tl-tags"><span class="tag eat">Lahmacun 1,5€</span><span class="tag">Forno Balat</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Mirador de Pierre Loti + teleférico de Eyüp ⭐</div>
+            <div class="tl-desc">A 20 min andando desde Balat (o bus). Coged el teleférico (teleferik) de Eyüp que sube en 5 min a la colina de Pierre Loti. Arriba: las mejores vistas del Cuerno de Oro de toda la ciudad, una terraza de té y un ambiente completamente diferente — abuelos turcos bebiendo çay, palomas, silencio. Poca gente lo conoce. <strong>El más secreto de todos los miradores de Estambul.</strong></div>
+            <div class="tl-tags"><span class="tag see">Mirador Pierre Loti</span><span class="tag tip">Secreto local</span><span class="tag move">Teleférico ~1€</span><span class="tag eat">Çay con vistas</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">16:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Vuelta al hostal — recoger maletas</div>
+            <div class="tl-desc">Desde Eyüp/Balat hasta Karaköy/Beyoğlu: autobús o tranvía. ~30 min. Recoged las maletas y cenad algo rápido cerca (dürüm para llevar, ~3€).</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Traslado a Esenler Otogar 🚌</div>
+            <div class="tl-desc"><strong>Usad Esenler Otogar</strong> (también llamado Büyük Istanbul Otogarı o 15 Temmuz Otogarı) — es el otogar principal del lado europeo. Metro <strong>M1A o M1B</strong> desde Yenikapı o Aksaray hasta la parada "Otogar" — 30–40 min, muy directo con maletas.<br><br>
+            Llegad a la estación con <strong>al menos 45–60 min de antelación</strong> para encontrar la compañía y el andén correcto. La estación es enorme (271 compañías de buses). Buscad el andén de vuestra compañía (Nevşehir Seyahat, Metro Turizm o Kamil Koç).</div>
+            <div class="tl-tags"><span class="tag bus">Metro M1A → "Otogar"</span><span class="tag">~0,40€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">21:50</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Bus nocturno → Göreme 🌙</div>
+            <div class="tl-desc">Salida. Duración: 9h 20 min. Los buses turcos son modernos: asientos reclinables amplios, pantalla individual, WiFi y azafato que sirve agua, galletas y bebidas periódicamente. Dormid todo lo que podáis. Llegada a Göreme: 07:10 del día 13.</div>
+            <div class="tl-tags"><span class="tag bus">Bus nocturno ~25–35€</span><span class="tag tip">Nevşehir Seyahat recomendado</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <span><strong>Para el bus:</strong> Llevad almohada de viaje, tapones para los oídos y la música descargada. En el bus también sirven çay a mitad de camino. El bus para ~1 vez en un area de servicio a medianoche — no os bajéis si no tenéis que ir al baño, para no perderos.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 5 ═══ -->
+<section class="section" id="dia5">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d5')">
+      <div class="day-head-left">
+        <div class="day-num">05</div>
+        <div class="day-info">
+          <div class="day-title">Capadocia — Chimeneas de Hadas y atardecer mágico</div>
+          <div class="day-date">Lunes 13 Abril — único día completo en Göreme</div>
+        </div>
+      </div>
+      <div class="alert warning" style="margin:.75rem .75rem 0; font-size:12px; background:#fef8ed; border-left:3px solid var(--warn); color:#614010; border-radius:4px; padding:.5rem .75rem; display:block;">
+        ⚠️ Llegáis de noche de bus. Tomaos la mañana con calma. No programéis nada físicamente intenso antes de las 10:30.
+      </div>
+      <div class="day-toggle" id="toggle-d5">▾</div>
+    </div>
+    <div class="day-body" id="body-d5">
+
+      <div class="alert info" style="margin-bottom:1rem;">
+        <span class="alert-icon">🚌</span>
+        <div class="alert-body">
+          <strong>Al llegar al otogar de Göreme:</strong> El hostal normalmente tiene un servicio de recogida o podéis caminar (el centro está a 5–10 min). Si el hostal no está listo aún, dejad las maletas allí y id a desayunar.
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">07:10</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Llegada a Göreme — desayuno de bienvenida</div>
+            <div class="tl-desc">El hostal os dará desayuno (generalmente incluido en cave hostels: pan, tomate, aceitunas, huevos, queso y çay ilimitado). Tomadlo tranquilamente y absorved el ambiente marciano del entorno.</div>
+            <div class="tl-tags"><span class="tag eat">Desayuno incluido en hostal</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">09:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Check-in y ducha — imprescindible</div>
+            <div class="tl-desc">Refrescaos. Aunque no esté la habitación lista, el hostal os deja usar las duchas.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">09:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">RESERVAD el shuttle para mañana al aeropuerto</div>
+            <div class="tl-desc">Lo primero que hagáis al llegar: pedid al hostal que os reserve el shuttle a Kayseri Airport para las <strong>07:00–07:15 del día 14</strong>. Precio: ~10€/persona en shuttle compartido, o ~90–100€ para una minivan privada para los 9 (recomendado, ~10€/persona también). <strong>Sin reserva previa, os quedáis sin coche.</strong></div>
+            <div class="tl-tags"><span class="tag bus">Shuttle Kayseri ~10€/persona</span><span class="tag warn">Reservad HOY mismo</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Quads (ATV) por los valles ⭐⭐</div>
+            <div class="tl-desc">La actividad reina para un grupo de 9. Alquilad ATVs (quads) en la calle principal de Göreme — hay decenas de empresas. Al ser 9, negociad un precio en bloque. Precio aproximado: <strong>25–40€ por quad/hora</strong>. Con 9 personas necesitáis 5 quads mínimo (algunos son dobles).<br><br>
+            Ruta recomendada (2–2,5h): <strong>Love Valley → Rose Valley → Sword Valley → Devrent Valley</strong>. Los mapas están en papel en la empresa. No hace falta guía — seguid las pistas de tierra.<br><br>
+            ⚠️ En Semana Santa: reservad con días de antelación. Si llegáis el día antes sin reserva, podéis quedaros sin quads.</div>
+            <div class="tl-tags"><span class="tag see">Love Valley, Rose Valley</span><span class="tag">~25–40€/quad/hora</span><span class="tag warn">Reservad con antelación</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">13:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Comida — cocina de Capadocia</div>
+            <div class="tl-desc">Pedid el <strong>Testi Kebab</strong> (guiso de carne estofado en una vasija de barro que el camarero rompe delante de vosotros — es un espectáculo). ~12–15€/persona. <em>Pide House</em> o <em>Anatolian Kitchen</em> en el centro de Göreme.</div>
+            <div class="tl-tags"><span class="tag eat">Testi Kebab ~12–15€</span><span class="tag tip">Espectáculo incluido</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">15:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Museo al Aire Libre de Göreme (opcional)</div>
+            <div class="tl-desc">Patrimonio UNESCO a 1 km del centro. Iglesias rupestres del siglo X con frescos biznatinos. Entrada: ~15€. Tiempo: 1,5h. Si estáis cansados del bus, es perfectamente sustituible por un paseo libre por los valles cercanos (gratis).</div>
+            <div class="tl-tags"><span class="tag see">Museo Göreme UNESCO</span><span class="tag">~15€ · 1,5h</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Relax en el hostal cueva</div>
+            <div class="tl-desc">Ducharse, descansar, cargar el móvil y preparar las mochilas para mañana. Dejad las cosas organizadas esta tarde — mañana salís muy pronto.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Sunset Point (Aşıklar Tepesi) ⭐⭐</div>
+            <div class="tl-desc">El mirador al atardecer de Göreme. Está a 15 min andando cuesta arriba desde el centro — id con tiempo. Hay un pequeño peaje simbólico (~ 1–2€) para entrar. Cuando el sol se pone sobre los valles y las chimeneas de hadas se tiñen de rojo y naranja es una de las imágenes más impresionantes de Turquía. Llevad cerveza comprada en el supermercado (~1€ la lata) y disfrutad.</div>
+            <div class="tl-tags"><span class="tag see">Sunset Point</span><span class="tag tip">El mejor atardecer del viaje</span><span class="tag eat">Cerveza supermercado ~1€</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">20:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Cena de despedida + shisha</div>
+            <div class="tl-desc">Cena en el centro de Göreme. <strong>Fat Boys</strong> o cualquier rooftop bar — ambiente mochilero internacional, shisha, buena música. La última noche de aventura.</div>
+            <div class="tl-tags"><span class="tag eat">Cena + shisha</span><span class="tag night">Fat Boys</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">22:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">A dormir — mañana hay que madrugar</div>
+            <div class="tl-desc">El shuttle sale a las 07:00–07:15. Necesitáis estar listos (con check-out hecho y maletas listas) antes de esa hora. El despertador: 06:15.</div>
+            <div class="tl-tags"><span class="tag warn">Despertador: 06:15</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DÍA 6 ═══ -->
+<section class="section" id="dia6">
+  <div class="day-card">
+    <div class="day-head" onclick="toggleDay('d6')">
+      <div class="day-head-left">
+        <div class="day-num">06</div>
+        <div class="day-info">
+          <div class="day-title">Globos, aeropuerto y regreso a casa</div>
+          <div class="day-date">Martes 14 Abril — vuelo Kayseri 09:30</div>
+        </div>
+      </div>
+      <div class="alert critical" style="margin:.75rem .75rem 0; font-size:12px; background:#fef0ed; border-left:3px solid var(--err); color:#6b1a10; border-radius:4px; padding:.5rem .75rem; display:block;">
+        🚨 Vuelo a las 09:30 desde Kayseri (80 km, ~1h15 en coche). Salida del hostal: 07:00–07:15 como máximo.
+      </div>
+      <div class="day-toggle" id="toggle-d6">▾</div>
+    </div>
+    <div class="day-body" id="body-d6">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">06:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">El amanecer con los globos — desde la terraza 🎈</div>
+            <div class="tl-desc">Subid a la terraza del hostal en pijama con una manta. A partir de las 06:00–06:15 el cielo de Göreme se llena de 100–150 globos aerostáticos encendiéndose y elevándose. Desde una terraza cueva en el centro de Göreme tenéis la misma imagen que desde un globo (sin pagar los 150–250€). Es completamente gratis y es posiblemente la imagen más bonita del viaje.</div>
+            <div class="tl-tags"><span class="tag see">Globos desde la terraza</span><span class="tag ok">Completamente gratis</span><span class="tag tip">La joya del viaje</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">06:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Check-out y carga del shuttle</div>
+            <div class="tl-desc">Maletas ya preparadas la noche anterior. Check-out, último çay y al shuttle.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">07:00</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Shuttle Göreme → Kayseri Airport 🚐</div>
+            <div class="tl-desc">Os recoge en el hostal. Trayecto: ~1h–1h15 (80 km). Llegada al aeropuerto: ~08:15–08:30. Con vuelo a las 09:30 tenéis tiempo suficiente para el check-in, seguridad y cafetería.</div>
+            <div class="tl-tags"><span class="tag bus">Shuttle privado ~90–100€ total / 10€/persona</span><span class="tag">Reservado el día anterior</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">09:30</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Vuelo Kayseri → Estambul (escala 4h35)</div>
+            <div class="tl-desc">Escala en Estambul. No salgáis del aeropuerto — tenéis 4h35 que es tiempo justo para comer, comprar en duty-free y embarcar al vuelo a Viena.</div>
+            <div class="tl-tags"><span class="tag move">Kayseri → IST → Viena</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:05</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Llegada a Viena 🏠</div>
+            <div class="tl-desc">¡Fin del viaje! Con la barriga llena de kebab, el teléfono lleno de fotos y la tarjeta algo más vacía de lo esperado (pero menos de lo que creíais).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRESUPUESTO ═══ -->
+<section class="section" id="presupuesto">
+  <div class="section-header">
+    <span class="section-label">Dinero</span>
+    <h2 class="section-title">Presupuesto estimado por persona</h2>
+  </div>
+
+  <div class="cost-wrap">
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th class="num">Mín (€)</th>
+          <th class="num">Máx (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Hostal Estambul (3 noches en dorm)</td><td class="num">30</td><td class="num">55</td></tr>
+        <tr><td>Hostal cueva Göreme (1 noche)</td><td class="num">10</td><td class="num">20</td></tr>
+        <tr><td>Bus nocturno Estambul → Göreme</td><td class="num">23</td><td class="num">35</td></tr>
+        <tr><td>Shuttle Göreme → Kayseri Airport</td><td class="num">10</td><td class="num">12</td></tr>
+        <tr><td>Transporte urbano Estambul (IstanbulKart)</td><td class="num">8</td><td class="num">12</td></tr>
+        <tr><td>Comidas (4–8€/día × 5 días)</td><td class="num">20</td><td class="num">40</td></tr>
+        <tr><td>Entradas (Cisterna 12€ + optativas)</td><td class="num">12</td><td class="num">55</td></tr>
+        <tr><td>Quads Capadocia (2h)</td><td class="num">25</td><td class="num">40</td></tr>
+        <tr><td>Bebidas / vida nocturna</td><td class="num">20</td><td class="num">50</td></tr>
+        <tr><td>Havabus SAW → Taksim (llegada)</td><td class="num">7</td><td class="num">7</td></tr>
+        <tr><td>Imprevistos / souvenirs / shisha</td><td class="num">10</td><td class="num">30</td></tr>
+        <tr><td style="font-weight:600">TOTAL ESTIMADO (sin vuelos)</td><td class="num" style="font-weight:600; color:var(--teal)">175€</td><td class="num" style="font-weight:600; color:var(--warm)">356€</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert ok">
+    <span class="alert-icon">✅</span>
+    <div class="alert-body">
+      Con un presupuesto de <strong>~200–250€ por persona</strong> (sin vuelos) disfrutáis del viaje muy bien, con algún rooftop, los quads y cenas sentados. El rango bajo (~175€) implica ir a tope de ahorro (piso Airbnb compartido, comer siempre de pie, sin entradas de pago).
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRAMPAS ═══ -->
+<section class="section" id="trampas">
+  <div class="section-header">
+    <span class="section-label">Cuidado</span>
+    <h2 class="section-title">Trampas turísticas a evitar</h2>
+  </div>
+
+  <div class="trap-list">
+    <div class="trap">
+      <div class="trap-badge">Estafa</div>
+      <div>
+        <strong>El limpiabotas del cepillo caído</strong> — Un señor "sin querer" deja caer su cepillo. Si se lo recogéis, insiste en limpiaros los zapatos "de regalo". Luego exige dinero de forma muy agresiva. Ignoradle y seguid caminando.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Timo</div>
+      <div>
+        <strong>Taxis sin taxímetro</strong> — Los taxis de la calle en Estambul os intentarán cobrar precio fijo (siempre el doble). Exigid siempre encender el taxímetro: "Taksimetre, lütfen" (Tak-see-met-reh, lut-fen). Mejor aun: usad <strong>BiTaksi</strong> o <strong>Uber</strong> que fijan el precio antes.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Timo</div>
+      <div>
+        <strong>Tours del Bósforo en el muelle</strong> — Los tíos que gritan "Bosphorus Tour! 20 euros!" en Eminönü. El ferry público hace lo mismo por 0,80€. Nunca paguéis más de 3€ por un trayecto en ferry.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Aviso</div>
+      <div>
+        <strong>Restaurantes con foto-menú en Sultanahmet</strong> — Los que tienen cartas en 5 idiomas y fotos grandes de cada plato siempre cobran 2–3x más que los restaurantes para locales. Los turcos no comen en Sultanahmet.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Aviso</div>
+      <div>
+        <strong>Casas de cambio del aeropuerto y de la zona turística</strong> — El tipo de cambio en el aeropuerto de SAW es terrible. Sacad solo lo justo para el bus. Los mejores cajeros: Akbank, Yapı Kredi. Mejor aún: Revolut o N26 directamente.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Aviso</div>
+      <div>
+        <strong>Amigos falsos que "solo quieren practicar inglés"</strong> — Se acercan muy amablemente a turistas solos o en grupos y terminan llevándoos a un bar donde os cobran precios desorbitados. Si alguien se pega a vosotros de forma persistente, decid "No gracias" y alejáos.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Capadocia</div>
+      <div>
+        <strong>Quads sin revisar el estado del vehículo</strong> — Antes de salir, comprobad frenos, nivel de combustible y el estado del quad. Fotografiad cualquier arañazo existente y enseñádselo al encargado. Algunos intentan cobrar "daños" que ya existían.
+      </div>
+    </div>
+    <div class="trap">
+      <div class="trap-badge">Capadocia</div>
+      <div>
+        <strong>Shuttle al aeropuerto sin reservar</strong> — En Kayseri airport, sin reserva previa, solo podéis coger taxi. Los taxis del aeropuerto de Kayseri tienen mala reputación por cobrar precios abusivos a turistas. Reservad el shuttle el día anterior desde el hostal.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPS ═══ -->
+<section class="section" id="apps">
+  <div class="section-header">
+    <span class="section-label">Herramientas</span>
+    <h2 class="section-title">Apps esenciales y trucos de ahorro</h2>
+  </div>
+
+  <div class="app-grid">
+    <div class="app-card">
+      <div class="app-name">Moovit</div>
+      <div class="app-desc">Transporte público de Estambul en tiempo real. Más fiable que Google Maps para los buses locales.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">BiTaksi / inDriver</div>
+      <div class="app-desc">Pedir taxi con precio fijo en Estambul. Evita los timos de los taxis de la calle.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">Revolut / N26</div>
+      <div class="app-desc">Para sacar TRY en cajeros sin comisión. Esencial — ahorraréis 10–15% en cada cambio de divisas.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">Maps.me (offline)</div>
+      <div class="app-desc">Para Capadocia con los quads. Funciona sin internet. Descargad el mapa de Nevşehir antes del viaje.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">Obilet.com</div>
+      <div class="app-desc">Para comprar los tickets del bus nocturno Estambul → Göreme online. También FlixBus tiene rutas.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">Google Translate</div>
+      <div class="app-desc">Con la cámara: apunta a menús o señales en turco y traduce al instante. Muy útil en restaurantes locales.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">Airalo / Holafly</div>
+      <div class="app-desc">eSIM turca con datos. Compradla antes del vuelo. ~8–12€ por 7 días. Mucho más barata que el roaming.</div>
+    </div>
+    <div class="app-card">
+      <div class="app-name">XE Currency</div>
+      <div class="app-desc">Convertidor de TRY a euros en tiempo real. Para saber siempre qué estáis pagando realmente.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <div class="section-header" style="margin-bottom:1rem;">
+      <span class="section-label">Trucos</span>
+      <h3 class="section-title" style="font-size:1.1rem;">Tips locales que Gemini no os dio</h3>
+    </div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>Agua barata:</strong> En Estambul no se bebe el agua del grifo. Comprad garrafas de 5L en supermercados Şok, BİM o A101 (~0,50€). Para las habitaciones del hostal y rellenar botellas.</div></div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>El mejor kebab no está en Sultanahmet:</strong> Los mejores y más baratos kebabs están en los barrios donde viven los locales: Beyoğlu, Kadıköy, Beşiktaş. Si hay cola de turcos esperando, es buena señal.</div></div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>Çay gratis:</strong> En muchos bazares os ofrecerán çay (té turco) mientras curioseáis. Aceptadlo — es tradición y es gratis. No os obliga a comprar nada.</div></div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>Supermercados de noche:</strong> Los supermercados BİM y A101 tienen cervezas, snacks y agua muy baratos. Para la noche, comprad provisiones antes de salir de fiesta y bebéis en la calle (en Kadıköy es completamente normal).</div></div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>El regateo tiene sus reglas:</strong> Solo en bazares y mercados. Empezad ofreciendo el 40–50% del precio pedido, nunca más. En restaurantes, supermercados y transporte público NO se regatea.</div></div>
+    <div class="alert ok"><span class="alert-icon">💡</span><div class="alert-body"><strong>Globos en Capadocia:</strong> Si queréis volar en globo pero no tenéis presupuesto (150–250€), la terraza del hostal es literalmente la mejor vista. Muchos viajeros lo prefieren porque podéis ver 100+ globos a la vez en lugar de estar dentro de uno solo.</div></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  Itinerario preparado para 9 viajeros Erasmus · Abril 2026 · Información verificada con fuentes actualizadas a marzo 2026.<br>
+  Precios en EUR aproximados — la lira turca fluctúa. Siempre verificad los precios en el momento del viaje.
+</footer>
+
+<script>
+function toggleDay(id) {
+  const body = document.getElementById('body-' + id);
+  const toggle = document.getElementById('toggle-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+// Open day 1 by default, close others
+['d2','d3','d4','d5','d6'].forEach(id => {
+  const b = document.getElementById('body-' + id);
+  if (b) { b.style.display = 'none'; b.classList.remove('open'); }
+});
+</script>
+
+</body>
+</html>
