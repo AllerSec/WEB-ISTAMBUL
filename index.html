@@ -379,17 +379,17 @@
 <!-- NAV -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <button class="nav-btn active" onclick="scrollTo('antes')">Antes de volar</button>
-    <button class="nav-btn" onclick="scrollTo('alojamiento')">Dónde dormir</button>
-    <button class="nav-btn" onclick="scrollTo('dia1')">Día 1</button>
-    <button class="nav-btn" onclick="scrollTo('dia2')">Día 2</button>
-    <button class="nav-btn" onclick="scrollTo('dia3')">Día 3</button>
-    <button class="nav-btn" onclick="scrollTo('dia4')">Día 4</button>
-    <button class="nav-btn" onclick="scrollTo('dia5')">Día 5</button>
-    <button class="nav-btn" onclick="scrollTo('dia6')">Día 6</button>
-    <button class="nav-btn" onclick="scrollTo('presupuesto')">Presupuesto</button>
-    <button class="nav-btn" onclick="scrollTo('trampas')">Trampas</button>
-    <button class="nav-btn" onclick="scrollTo('apps')">Apps</button>
+    <button class="nav-btn active" onclick="navTo(this,'antes')">Antes de volar</button>
+    <button class="nav-btn" onclick="navTo(this,'alojamiento')">Dónde dormir</button>
+    <button class="nav-btn" onclick="navTo(this,'dia1')">Día 1</button>
+    <button class="nav-btn" onclick="navTo(this,'dia2')">Día 2</button>
+    <button class="nav-btn" onclick="navTo(this,'dia3')">Día 3</button>
+    <button class="nav-btn" onclick="navTo(this,'dia4')">Día 4</button>
+    <button class="nav-btn" onclick="navTo(this,'dia5')">Día 5</button>
+    <button class="nav-btn" onclick="navTo(this,'dia6')">Día 6</button>
+    <button class="nav-btn" onclick="navTo(this,'presupuesto')">Presupuesto</button>
+    <button class="nav-btn" onclick="navTo(this,'trampas')">Trampas</button>
+    <button class="nav-btn" onclick="navTo(this,'apps')">Apps</button>
   </div>
 </nav>
 
@@ -1206,11 +1206,11 @@ function toggleDay(id) {
   body.style.display = isOpen ? 'none' : 'block';
   toggle.classList.toggle('open', !isOpen);
 }
-function scrollTo(id) {
+function navTo(btn, id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 // Open day 1 by default, close others
 ['d2','d3','d4','d5','d6'].forEach(id => {
