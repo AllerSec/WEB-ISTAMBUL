@@ -288,36 +288,17 @@
     border: 1px solid rgba(176,48,32,0.2);
   }
 
-  /* ── PLACE PHOTOS ── */
-  .place-photo {
-    width: 100%; height: 180px;
+  /* ── TIMELINE PHOTO ── */
+  .tl-photo {
+    width: 100%; height: 160px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: .75rem;
+    border-radius: 6px;
+    margin: .4rem 0 .5rem;
     display: block;
-  }
-  .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: .75rem;
-    margin-bottom: 1rem;
-  }
-  .photo-item {
-    position: relative; border-radius: 8px; overflow: hidden;
     border: 1px solid var(--sand2);
   }
-  .photo-item img {
-    width: 100%; height: 150px; object-fit: cover; display: block;
-  }
-  .photo-caption {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    color: #fff; font-size: 11px; font-weight: 500;
-    padding: .4rem .6rem;
-  }
   @media (max-width: 640px) {
-    .photo-grid { grid-template-columns: 1fr 1fr; }
-    .photo-item img { height: 110px; }
+    .tl-photo { height: 130px; }
   }
 
   /* ── APPS ── */
@@ -555,21 +536,6 @@
     </div>
     <div class="day-body" id="body-d1" style="display:none">
 
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Istiklal_avenue.jpg/800px-Istiklal_avenue.jpg" alt="İstiklal Caddesi" loading="lazy">
-          <div class="photo-caption">İstiklal Caddesi</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Galata_tower.jpg/800px-Galata_tower.jpg" alt="Torre Gálata" loading="lazy">
-          <div class="photo-caption">Torre Gálata</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Nevizade_Sokak.jpg/800px-Nevizade_Sokak.jpg" alt="Nevizade Sokak" loading="lazy">
-          <div class="photo-caption">Nevizade Sokak</div>
-        </div>
-      </div>
-
       <div class="alert info" style="margin-bottom:1rem;">
         <span class="alert-icon">✈</span>
         <div class="alert-body">
@@ -606,6 +572,7 @@
           <div class="tl-left"><div class="tl-time">17:45</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Paseo por İstiklal Caddesi → Torre Gálata</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80" alt="Torre Gálata y İstiklal Caddesi" loading="lazy">
             <div class="tl-desc">La gran avenida peatonal de Beyoğlu: 1,5 km de tiendas, música callejera y gente. Bajad hasta la <strong>Torre Gálata</strong> (no hace falta subir, se ve perfecta desde fuera). Por el camino comprad un <em>Simit</em> (rosquilla de sésamo, ~0,30€) en cualquier carrito callejero.</div>
             <div class="tl-tags"><span class="tag see">İstiklal Caddesi</span><span class="tag see">Torre Gálata</span><span class="tag eat">Simit 0,30€</span></div>
           </div>
@@ -622,6 +589,7 @@
           <div class="tl-left"><div class="tl-time">21:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Primera noche: Nevizade Sokak y Asmalımescit</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1589561253898-768105ca91a8?w=800&q=80" alt="Vida nocturna Beyoğlu" loading="lazy">
             <div class="tl-desc">Dos callejuelas adyacentes en Beyoğlu con bares de tapas en la calle, mesas en la acera y cervezas Efes a buen precio. Ambiente turco auténtico — ni demasiado turístico ni demasiado local. Ideal para la primera noche: accesible desde el hostal andando.</div>
             <div class="tl-tags"><span class="tag night">Nevizade Sokak</span><span class="tag night">Asmalımescit</span><span class="tag">Cerveza Efes ~2€</span></div>
           </div>
@@ -651,25 +619,6 @@
     </div>
     <div class="day-body" id="body-d2">
 
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Blue_mosque_at_sunset.jpg/800px-Blue_mosque_at_sunset.jpg" alt="Mezquita Azul" loading="lazy">
-          <div class="photo-caption">Mezquita Azul</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_Mars_2013.jpg/800px-Hagia_Sophia_Mars_2013.jpg" alt="Ayasofya" loading="lazy">
-          <div class="photo-caption">Ayasofya</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Basilica_Cistern_2007.jpg/800px-Basilica_Cistern_2007.jpg" alt="Cisterna Basílica" loading="lazy">
-          <div class="photo-caption">Cisterna Basílica</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Bosphorus_from_Eminonu.jpg/800px-Bosphorus_from_Eminonu.jpg" alt="Ferry del Bósforo" loading="lazy">
-          <div class="photo-caption">Ferry del Bósforo</div>
-        </div>
-      </div>
-
       <div class="alert warning" style="margin-bottom:1rem;">
         <span class="alert-icon">⚠️</span>
         <div class="alert-body">
@@ -698,6 +647,7 @@
           <div class="tl-left"><div class="tl-time">09:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Mezquita Azul (Sultan Ahmet Camii) — GRATIS</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=800&q=80" alt="Mezquita Azul" loading="lazy">
             <div class="tl-desc">La entrada es gratuita. Cubrid hombros y piernas (hay pañuelos en la entrada). Tiempo dentro: 30–40 min. Las 6 minaretes desde fuera son igual de impresionantes — si la cola es larguísima, valorad verla desde la plaza y entrar a Ayasofya.</div>
             <div class="tl-tags"><span class="tag see">Mezquita Azul</span><span class="tag ok">Gratis</span><span class="tag">30–45 min</span></div>
           </div>
@@ -706,6 +656,7 @@
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Ayasofya (Santa Sofía) — entrada de pago</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800&q=80" alt="Ayasofya" loading="lazy">
             <div class="tl-desc">Es mezquita activa desde 2020. Entrada: ~25–30€ por persona (verificad precio actualizado en la taquilla o en la web oficial). Para 9 personas son ~225–270€ en total — decidid en grupo si vale la pena o la véis desde fuera (que también impresiona). Si entráis: 45–60 min.</div>
             <div class="tl-tags"><span class="tag see">Ayasofya</span><span class="tag warn">~25–30€/persona</span><span class="tag">45–60 min</span></div>
             <div class="tip-box" style="margin-top:.5rem;">
@@ -718,6 +669,7 @@
           <div class="tl-left"><div class="tl-time">11:45</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Cisterna Basílica (Yerebatan Sarnıcı)</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&q=80" alt="Cisterna Basílica" loading="lazy">
             <div class="tl-desc">A 2 min andando de Ayasofya. Una cisterna subterránea del siglo VI con columnas iluminadas y música ambiente — parece una película. Entrada: ~12€. Tiempo: 45 min. Reservad entrada online para saltaros la cola.</div>
             <div class="tl-tags"><span class="tag see">Cisterna Basílica</span><span class="tag">~12€</span><span class="tag">45 min</span></div>
           </div>
@@ -734,6 +686,7 @@
           <div class="tl-left"><div class="tl-time">14:15</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Gran Bazar (Kapalıçarşı) — solo a curiosear</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=800&q=80" alt="Gran Bazar de Estambul" loading="lazy">
             <div class="tl-desc">El bazar cubierto más grande del mundo: 4.000 tiendas. Id solo a curiosear y perderos 30–45 min. <strong>No compréis nada aquí si no sois expertos en regatear</strong> — los precios iniciales son 2–3x el valor real. Para regalos: Bazar de las Especias (siguiente parada) es mejor.</div>
             <div class="tl-tags"><span class="tag see">Gran Bazar</span><span class="tag warn">No compréis aquí</span><span class="tag">30–45 min</span></div>
           </div>
@@ -742,6 +695,7 @@
           <div class="tl-left"><div class="tl-time">15:15</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Bazar de las Especias (Mısır Çarşısı)</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1594387303754-45a0b8a9e7e2?w=800&q=80" alt="Bazar de las Especias Estambul" loading="lazy">
             <div class="tl-desc">A 10 min andando por callejuelas llenas de especias, frutos secos, lokum (Turkish delight) y té. Mucho más auténtico que el Gran Bazar. Aquí sí podéis comprar souvenirs a buen precio — regatead sin miedo (ofertad el 50% del precio pedido).</div>
             <div class="tl-tags"><span class="tag see">Bazar de las Especias</span><span class="tag eat">Lokum, frutos secos</span><span class="tag">30 min</span></div>
           </div>
@@ -750,6 +704,7 @@
           <div class="tl-left"><div class="tl-time">16:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Ferry del Bósforo LOW-COST ⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1604928141064-207cea6f571f?w=800&q=80" alt="Ferry del Bósforo Estambul" loading="lazy">
             <div class="tl-desc">Bajad al muelle de <strong>Eminönü</strong> y coged el ferry público de <strong>Şehir Hatları</strong> con la IstanbulKart (~0,80€). Los ferrys de la compañía Turyol van hasta Üsküdar (lado asiático). El trayecto dura 20–30 min y tenéis vistas del Bósforo, el palacio de Topkapı y la silueta de la ciudad. <strong>No paguéis los "tours del Bósforo" de los tipos que gritan en el muelle — son caros y este ferry hace lo mismo.</strong></div>
             <div class="tl-tags"><span class="tag move">Ferry público ~0,80€</span><span class="tag see">Vistas del Bósforo</span><span class="tag ok">El mejor low-cost del viaje</span></div>
           </div>
@@ -773,6 +728,7 @@
           <div class="tl-left"><div class="tl-time">20:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Noche en Kadıköy (lado asiático) 🎉</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1623856516913-50e2e93b3ca0?w=800&q=80" alt="Kadıköy de noche" loading="lazy">
             <div class="tl-desc">Cruzad en ferry desde Eminönü o Kabataş a <strong>Kadıköy</strong> (~0,80€). Es el barrio universitario/hipster por excelencia: la cerveza es más barata, el ambiente es joven y alternativo, y la gente es local de verdad. Id a la zona de <strong>Kadife Sokak</strong> (la "calle de los bares") — barras en la acera, música en vivo, mezcla de turcos y guiris.<br><br>
             ⚠️ <strong>Atención al regreso:</strong> El último ferry regular a las ~23:30–00:30. Si os quedáis hasta tarde, lo más barato es compartir 2–3 taxis amarillos o usar BiTaksi. Con 9 personas: 3 taxis × ~10–12€ = ~3–4€/persona.</div>
             <div class="tl-tags"><span class="tag night">Kadife Sokak</span><span class="tag move">Ferry ~0,80€</span><span class="tag">Cerveza Efes ~1,5–2€</span></div>
@@ -798,21 +754,6 @@
     </div>
     <div class="day-body" id="body-d3">
 
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Ortakoy_mosque_and_Bosphorus_bridge.jpg/800px-Ortakoy_mosque_and_Bosphorus_bridge.jpg" alt="Mezquita de Ortaköy y Puente" loading="lazy">
-          <div class="photo-caption">Ortaköy — Mezquita y Puente del Bósforo</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Cihangir_istanbul.jpg/800px-Cihangir_istanbul.jpg" alt="Cihangir" loading="lazy">
-          <div class="photo-caption">Barrio de Cihangir</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Istanbul_Karakoy.jpg/800px-Istanbul_Karakoy.jpg" alt="Karaköy" loading="lazy">
-          <div class="photo-caption">Karaköy</div>
-        </div>
-      </div>
-
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
@@ -826,6 +767,7 @@
           <div class="tl-left"><div class="tl-time">12:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Barrio de Cihangir — callejeo libre</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1567881019-0abb42d50b47?w=800&q=80" alt="Cihangir Estambul" loading="lazy">
             <div class="tl-desc">El barrio más bohemio de Estambul. Calles empinadas con gatos por todas partes, librerías de segunda mano, cafeterías de especialidad y galerías de arte. <strong>Mermaid Stairs</strong> (escaleras decoradas) — buen foto-spot.</div>
             <div class="tl-tags"><span class="tag see">Cihangir</span><span class="tag">45 min</span></div>
           </div>
@@ -842,6 +784,7 @@
           <div class="tl-left"><div class="tl-time">14:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Kumpir en Ortaköy 🥔</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1597524678053-5dd901c13f7a?w=800&q=80" alt="Ortaköy Mezquita y Puente del Bósforo" loading="lazy">
             <div class="tl-desc">El ritual de Ortaköy: una patata asada gigante que rellenáis con todo lo que queréis (mantequilla, queso, maíz, aceitunas, etc.). ~3–4€. Comed sentados en la plaza con la <strong>Mezquita de Ortaköy y el Puente del Bósforo</strong> de fondo. Es una de las postales más bonitas de Estambul y completamente gratis (excepto la patata).</div>
             <div class="tl-tags"><span class="tag eat">Kumpir 3–4€</span><span class="tag see">Mezquita Ortaköy + puente</span><span class="tag tip">Foto obligatoria</span></div>
           </div>
@@ -858,6 +801,7 @@
           <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Atardecer en Rooftop ⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1598257006460-4cd5d043cf49?w=800&q=80" alt="Atardecer sobre Estambul" loading="lazy">
             <div class="tl-desc">Hay varios rooftops con vistas brutales al Cuerno de Oro desde Beyoğlu. <strong>Monkey Istanbul</strong> o <strong>360 Istanbul</strong> son los más conocidos. Los cócteles cuestan ~8–12€ pero la vista (sol poniéndose sobre Sultanahmet y el Bósforo) no tiene precio. Reservad mesa si vais los 9.</div>
             <div class="tl-tags"><span class="tag see">Vistas al Cuerno de Oro</span><span class="tag night">Cóctel ~8–12€</span></div>
           </div>
@@ -898,17 +842,6 @@
     </div>
     <div class="day-body" id="body-d4">
 
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Balat_istanbul.jpg/800px-Balat_istanbul.jpg" alt="Balat" loading="lazy">
-          <div class="photo-caption">Balat — casas de colores</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Pierre_Loti_Hill_Istanbul.jpg/800px-Pierre_Loti_Hill_Istanbul.jpg" alt="Pierre Loti" loading="lazy">
-          <div class="photo-caption">Mirador Pierre Loti</div>
-        </div>
-      </div>
-
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">10:00</div><div class="tl-line"></div></div>
@@ -921,6 +854,7 @@
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Barrios de Balat y Fener ⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1621683874784-b79c7c33a3cf?w=800&q=80" alt="Balat casas de colores Estambul" loading="lazy">
             <div class="tl-desc">Los antiguos barrios judío y griego de Estambul son lo más fotogénico e instagrameable de la ciudad. Casas de colores, calles empinadas, gatos por todos lados, cafeterías vintage y tiendas de segunda mano. Completamente fuera de las rutas turísticas estándar. Coged el tranvía T1 hasta Eminönü y luego bus hasta Balat (20 min total).<br><br>
             Imprescindibles: <em>Balat Merdivenler</em> (escaleras coloridas), la <em>Iglesia de los Búlgaros</em> (hierro forjado único en el mundo), el <em>Mercadillo de Balat</em>.</div>
             <div class="tl-tags"><span class="tag see">Balat + Fener</span><span class="tag tip">Joya escondida</span><span class="tag">2 horas</span></div>
@@ -938,6 +872,7 @@
           <div class="tl-left"><div class="tl-time">14:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Mirador de Pierre Loti + teleférico de Eyüp ⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1589913461245-890afca0a8d9?w=800&q=80" alt="Cuerno de Oro desde Pierre Loti" loading="lazy">
             <div class="tl-desc">A 20 min andando desde Balat (o bus). Coged el teleférico (teleferik) de Eyüp que sube en 5 min a la colina de Pierre Loti. Arriba: las mejores vistas del Cuerno de Oro de toda la ciudad, una terraza de té y un ambiente completamente diferente — abuelos turcos bebiendo çay, palomas, silencio. Poca gente lo conoce. <strong>El más secreto de todos los miradores de Estambul.</strong></div>
             <div class="tl-tags"><span class="tag see">Mirador Pierre Loti</span><span class="tag tip">Secreto local</span><span class="tag move">Teleférico ~1€</span><span class="tag eat">Çay con vistas</span></div>
           </div>
@@ -994,25 +929,6 @@
     </div>
     <div class="day-body" id="body-d5">
 
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Cappadocia_Balloon_Inflating.jpg/800px-Cappadocia_Balloon_Inflating.jpg" alt="Globos Capadocia" loading="lazy">
-          <div class="photo-caption">Globos sobre Capadocia</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Fairy_chimneys_cappadocia.jpg/800px-Fairy_chimneys_cappadocia.jpg" alt="Chimeneas de Hadas" loading="lazy">
-          <div class="photo-caption">Chimeneas de Hadas — Göreme</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Love_Valley_Cappadocia.jpg/800px-Love_Valley_Cappadocia.jpg" alt="Love Valley" loading="lazy">
-          <div class="photo-caption">Love Valley</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Goreme_open_air_museum.jpg/800px-Goreme_open_air_museum.jpg" alt="Museo al Aire Libre Göreme" loading="lazy">
-          <div class="photo-caption">Museo al Aire Libre Göreme</div>
-        </div>
-      </div>
-
       <div class="alert info" style="margin-bottom:1rem;">
         <span class="alert-icon">🚌</span>
         <div class="alert-body">
@@ -1048,6 +964,7 @@
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Quads (ATV) por los valles ⭐⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Capadocia valles en quad" loading="lazy">
             <div class="tl-desc">La actividad reina para un grupo de 9. Alquilad ATVs (quads) en la calle principal de Göreme — hay decenas de empresas. Al ser 9, negociad un precio en bloque. Precio aproximado: <strong>25–40€ por quad/hora</strong>. Con 9 personas necesitáis 5 quads mínimo (algunos son dobles).<br><br>
             Ruta recomendada (2–2,5h): <strong>Love Valley → Rose Valley → Sword Valley → Devrent Valley</strong>. Los mapas están en papel en la empresa. No hace falta guía — seguid las pistas de tierra.<br><br>
             ⚠️ En Semana Santa: reservad con días de antelación. Si llegáis el día antes sin reserva, podéis quedaros sin quads.</div>
@@ -1066,6 +983,7 @@
           <div class="tl-left"><div class="tl-time">15:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Museo al Aire Libre de Göreme (opcional)</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?w=800&q=80" alt="Göreme chimeneas de hadas Capadocia" loading="lazy">
             <div class="tl-desc">Patrimonio UNESCO a 1 km del centro. Iglesias rupestres del siglo X con frescos biznatinos. Entrada: ~15€. Tiempo: 1,5h. Si estáis cansados del bus, es perfectamente sustituible por un paseo libre por los valles cercanos (gratis).</div>
             <div class="tl-tags"><span class="tag see">Museo Göreme UNESCO</span><span class="tag">~15€ · 1,5h</span></div>
           </div>
@@ -1081,6 +999,7 @@
           <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Sunset Point (Aşıklar Tepesi) ⭐⭐</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80" alt="Atardecer Capadocia Göreme" loading="lazy">
             <div class="tl-desc">El mirador al atardecer de Göreme. Está a 15 min andando cuesta arriba desde el centro — id con tiempo. Hay un pequeño peaje simbólico (~ 1–2€) para entrar. Cuando el sol se pone sobre los valles y las chimeneas de hadas se tiñen de rojo y naranja es una de las imágenes más impresionantes de Turquía. Llevad cerveza comprada en el supermercado (~1€ la lata) y disfrutad.</div>
             <div class="tl-tags"><span class="tag see">Sunset Point</span><span class="tag tip">El mejor atardecer del viaje</span><span class="tag eat">Cerveza supermercado ~1€</span></div>
           </div>
@@ -1128,6 +1047,7 @@
           <div class="tl-left"><div class="tl-time">06:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">El amanecer con los globos — desde la terraza 🎈</div>
+            <img class="tl-photo" src="https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=800&q=80" alt="Globos aerostáticos al amanecer Capadocia" loading="lazy">
             <div class="tl-desc">Subid a la terraza del hostal en pijama con una manta. A partir de las 06:00–06:15 el cielo de Göreme se llena de 100–150 globos aerostáticos encendiéndose y elevándose. Desde una terraza cueva en el centro de Göreme tenéis la misma imagen que desde un globo (sin pagar los 150–250€). Es completamente gratis y es posiblemente la imagen más bonita del viaje.</div>
             <div class="tl-tags"><span class="tag see">Globos desde la terraza</span><span class="tag ok">Completamente gratis</span><span class="tag tip">La joya del viaje</span></div>
           </div>
