@@ -182,8 +182,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
     width: 100%;
   }
 
@@ -226,8 +224,6 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
     width: 100%;
   }
 
@@ -238,14 +234,25 @@
   /* Título grande revelado */
   .willem__h1-final {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 10vw, 7rem);
+    font-size: clamp(3rem, 9vw, 7rem);
     font-weight: 700;
     line-height: .95;
     color: #fff;
     display: flex;
     flex-wrap: wrap;
-    gap: 0 .01em;
+    align-items: baseline;
+    gap: 0 .18em;
     margin-bottom: .6rem;
+  }
+
+  /* Word wrapper — keeps letters of a word together, allows wrap between words */
+  .willem__word {
+    display: inline-flex;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .willem__word.is--amp-word {
+    overflow: visible;
   }
 
   .willem__letter-white {
@@ -255,7 +262,6 @@
     will-change: transform, opacity;
   }
   .willem__letter-white.is--amp {
-    margin: 0 .15em;
     color: var(--warm2);
     font-style: italic;
   }
@@ -298,27 +304,51 @@
     to   { transform: translateY(8px); }
   }
 
+  /* ── Desktop large ── */
+  @media (min-width: 1280px) {
+    .willem__h1 { font-size: 8rem; }
+    .willem__h1-final { font-size: 7rem; }
+    .willem-header__top { padding: 2rem 3rem; }
+    .willem-header__bottom { padding: 3rem 3rem calc(3rem + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  /* ── Desktop mid ── */
+  @media (min-width: 860px) and (max-width: 1279px) {
+    .willem-header__top { padding: 1.75rem 2.5rem; }
+    .willem-header__bottom { padding: 2.5rem 2.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+  }
+
   /* ── Mobile ── */
   @media (max-width: 640px) {
     .willem__h1 {
-      font-size: clamp(2.4rem, 14vw, 4rem);
+      font-size: clamp(2.2rem, 12vw, 3.5rem);
     }
-    .willem-header__top { padding: 1rem 1.25rem; }
+    .willem-header__top {
+      padding: calc(.85rem + env(safe-area-inset-top, 0px)) 1.25rem .85rem;
+    }
     .willem-header__bottom {
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
-      padding: 1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+      padding: 1.25rem 1.25rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
     }
     .willem__h1-final {
-      font-size: clamp(2.6rem, 13vw, 4rem);
+      font-size: clamp(2.4rem, 11vw, 3.5rem);
+      gap: 0 .12em;
     }
+    .willem__sub { font-size: 12px; }
     .willem__scroll-cta {
       flex-direction: row;
       gap: .5rem;
     }
     .willem-nav__links { display: none; }
     .willem-loader__box { border-radius: 5px; }
+  }
+
+  /* iPhone SE */
+  @media (max-width: 390px) {
+    .willem__h1 { font-size: clamp(1.9rem, 11vw, 2.8rem); }
+    .willem__h1-final { font-size: clamp(2rem, 10.5vw, 3rem); }
   }
 
   /* ══════════════════════════════════════════
@@ -949,24 +979,30 @@
     <div class="willem-header__bottom">
       <div class="willem__bottom-left">
         <div class="willem__h1-final">
-          <span class="willem__letter-white">E</span>
-          <span class="willem__letter-white">s</span>
-          <span class="willem__letter-white">t</span>
-          <span class="willem__letter-white">a</span>
-          <span class="willem__letter-white">m</span>
-          <span class="willem__letter-white">b</span>
-          <span class="willem__letter-white">u</span>
-          <span class="willem__letter-white">l</span>
-          <span class="willem__letter-white is--amp">&amp;</span>
-          <span class="willem__letter-white">C</span>
-          <span class="willem__letter-white">a</span>
-          <span class="willem__letter-white">p</span>
-          <span class="willem__letter-white">a</span>
-          <span class="willem__letter-white">d</span>
-          <span class="willem__letter-white">o</span>
-          <span class="willem__letter-white">c</span>
-          <span class="willem__letter-white">i</span>
-          <span class="willem__letter-white">a</span>
+          <span class="willem__word">
+            <span class="willem__letter-white">E</span>
+            <span class="willem__letter-white">s</span>
+            <span class="willem__letter-white">t</span>
+            <span class="willem__letter-white">a</span>
+            <span class="willem__letter-white">m</span>
+            <span class="willem__letter-white">b</span>
+            <span class="willem__letter-white">u</span>
+            <span class="willem__letter-white">l</span>
+          </span>
+          <span class="willem__word is--amp-word">
+            <span class="willem__letter-white is--amp">&amp;</span>
+          </span>
+          <span class="willem__word">
+            <span class="willem__letter-white">C</span>
+            <span class="willem__letter-white">a</span>
+            <span class="willem__letter-white">p</span>
+            <span class="willem__letter-white">a</span>
+            <span class="willem__letter-white">d</span>
+            <span class="willem__letter-white">o</span>
+            <span class="willem__letter-white">c</span>
+            <span class="willem__letter-white">i</span>
+            <span class="willem__letter-white">a</span>
+          </span>
         </div>
         <p class="willem__sub">9 – 14 Abril · Viena → SAW → Göreme → Kayseri → Viena</p>
       </div>
@@ -1908,109 +1944,88 @@ document.querySelectorAll('.tl-photo, .tl-photo-route').forEach(function(img) {
   img.addEventListener('error', function() { this.style.display = 'none'; });
 });
 
-// ── Willem Loading Animation ──
-function initWillemLoadingAnimation() {
+// Block scroll during loading — called by GSAP block once GSAP is ready
+function initWillemLoadingAnimation(onComplete) {
   var header = document.querySelector('.willem-header');
-  if (!header || typeof gsap === 'undefined') return;
+  if (!header) { if (onComplete) onComplete(); return; }
 
-  var letters = header.querySelectorAll('.willem__h1 .willem__letter');
-  var box = header.querySelector('.willem-loader__box');
-  var extras = header.querySelectorAll('.willem__cover-image-extra');
-  var mainImg = header.querySelector('.willem__cover-image');
-  var content = header.querySelector('.willem-header__content');
-  var navLinks = header.querySelectorAll('.willem-nav__link');
+  var letters    = header.querySelectorAll('.willem__h1 .willem__letter');
+  var box        = header.querySelector('.willem-loader__box');
+  var extras     = header.querySelectorAll('.willem__cover-image-extra');
+  var mainImg    = header.querySelector('.willem__cover-image');
+  var content    = header.querySelector('.willem-header__content');
+  var navLinks   = header.querySelectorAll('.willem-nav__link');
   var titleLetters = header.querySelectorAll('.willem__letter-white');
-  var sub = header.querySelector('.willem__sub');
-  var cta = header.querySelector('.willem__scroll-cta');
-  var loader = header.querySelector('.willem-loader');
+  var sub        = header.querySelector('.willem__sub');
+  var cta        = header.querySelector('.willem__scroll-cta');
+  var loader     = header.querySelector('.willem-loader');
 
-  // Precompute box target width (same as font height)
   var fontSize = parseFloat(getComputedStyle(header.querySelector('.willem__h1')).fontSize) || 80;
 
-  // Initial state
+  // Lock scroll
+  document.body.classList.add('willem-loading');
+
   gsap.set(box, { width: 0 });
   gsap.set(extras, { opacity: 0 });
   gsap.set(mainImg, { opacity: 0 });
 
-  var tl = gsap.timeline({ delay: 0.1 });
+  var tl = gsap.timeline({ delay: 0.1, onComplete: function() {
+    if (onComplete) onComplete();
+  }});
 
   // 1. Letters drop in
   tl.from(letters, {
-    y: '120%', opacity: 0,
-    duration: 0.6, stagger: 0.045,
+    y: '110%', opacity: 0,
+    duration: 0.55, stagger: 0.04,
     ease: 'power3.out'
   });
 
-  // 2. Box grows wide
+  // 2. Box grows
   tl.to(box, {
     width: fontSize * 1.05,
-    duration: 0.55,
+    duration: 0.5,
     ease: 'power2.inOut'
   }, '-=0.1');
 
-  // 3. Extra images flash in staggered
-  tl.to(extras, {
-    opacity: 1,
-    duration: 0.18,
-    stagger: 0.18,
-    ease: 'none'
-  }, '-=0.1');
+  // 3. Extra images flash
+  tl.to(extras, { opacity: 1, duration: 0.18, stagger: 0.18, ease: 'none' }, '-=0.1');
+  tl.to(extras, { opacity: 0, duration: 0.15, stagger: 0.08, ease: 'none' });
 
-  // 4. Extra images fade out
-  tl.to(extras, {
-    opacity: 0,
-    duration: 0.18,
-    stagger: 0.1,
-    ease: 'none'
-  });
+  // 4. Main image
+  tl.to(mainImg, { opacity: 1, duration: 0.28, ease: 'power2.out' }, '-=0.08');
 
-  // 5. Main image fades in
-  tl.to(mainImg, {
-    opacity: 1,
-    duration: 0.3,
-    ease: 'power2.out'
-  }, '-=0.1');
-
-  // 6. Pause a beat, then box + loader expand to full screen
+  // 5. Expand to fullscreen
   tl.to(box, {
-    width: '300vw', height: '300vh',
+    width: '350vw', height: '350vh',
     borderRadius: 0,
-    duration: 0.75,
+    duration: 0.7,
     ease: 'power2.inOut'
-  }, '+=0.35');
+  }, '+=0.3');
+  tl.to(loader, { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.2');
 
-  tl.to(loader, {
-    opacity: 0,
-    duration: 0.35,
-    ease: 'power2.in'
-  }, '-=0.2');
-
-  // 7. Content reveal
-  tl.set(content, { opacity: 1 }, '-=0.1');
+  // 6. Reveal content
+  tl.set(content, { opacity: 1 }, '-=0.05');
   tl.set(header, { background: 'transparent' });
 
-  // Nav links
   tl.from(navLinks, {
-    opacity: 0, y: -12,
-    duration: 0.45, stagger: 0.07,
+    opacity: 0, y: -10,
+    duration: 0.4, stagger: 0.06,
     ease: 'power2.out'
-  }, '-=0.15');
+  }, '-=0.1');
 
-  // Title letters
   tl.to(titleLetters, {
     opacity: 1, y: 0,
-    duration: 0.6, stagger: 0.03,
+    duration: 0.55, stagger: 0.025,
     ease: 'power3.out'
-  }, '-=0.3');
+  }, '-=0.25');
 
-  // Sub + cta
   tl.to([sub, cta], {
     opacity: 1, y: 0,
-    duration: 0.5, stagger: 0.12,
+    duration: 0.45, stagger: 0.1,
     ease: 'power2.out'
   }, '-=0.2');
 
-  // 8. After full reveal, unpin and scroll normally
+  // 7. Unpin header so page scrolls normally
   tl.call(function() {
     document.body.classList.remove('willem-loading');
     header.style.position = 'relative';
@@ -2020,11 +2035,6 @@ function initWillemLoadingAnimation() {
     header.classList.remove('is--hidden');
   });
 }
-
-// Run after GSAP loads
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.classList.add('willem-loading');
-});
 </script>
 
 <!-- GSAP + ScrollTrigger + Lenis para animaciones landing -->
@@ -2037,14 +2047,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Lenis smooth scroll
-  var lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(function(t) { lenis.raf(t * 1000); });
-  gsap.ticker.lagSmoothing(0);
-
-  // Willem loading animation
-  initWillemLoadingAnimation();
+  // Willem loading animation — start Lenis only after it completes
+  initWillemLoadingAnimation(function() {
+    if (typeof Lenis !== 'undefined') {
+      var lenis = new Lenis({ lerp: 0.08, smoothWheel: true, touchMultiplier: 2 });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function(t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      ScrollTrigger.refresh();
+    }
+  });
 
   // Sección info: título, textos y tarjetas
   gsap.fromTo('.lp-info-tag', { opacity: 0, y: 20 }, {
