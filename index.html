@@ -35,155 +35,294 @@
   }
 
   /* ══════════════════════════════════════════
-     LANDING — SECCIÓN 1: Carrusel
+     WILLEM LOADING ANIMATION
      ══════════════════════════════════════════ */
-  .lp-carousel {
-    position: relative;
-    height: 100svh;
-    min-height: 560px;
+
+  /* Ocultar body mientras carga */
+  body.willem-loading { overflow: hidden; }
+
+  /* Sección wrapper */
+  .willem-header {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
     background: #0d0d0d;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    transition: none;
+  }
+  .willem-header.is--hidden {
+    pointer-events: none;
   }
 
-  /* Track infinito */
-  .lp-track {
+  /* ── LOADER (fase inicial) ── */
+  .willem-loader {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-  }
-  .lp-item {
-    position: absolute;
-    width: 28rem;
-    height: 32rem;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
     display: flex;
+    align-items: center;
     justify-content: center;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-    animation: lp-scroll var(--time) linear infinite;
-    animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time));
-    pointer-events: auto;
-  }
-  .lp-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    transform: rotateY(-40deg);
-    transition: transform .5s ease;
-    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  }
-  .lp-item:hover img { transform: rotateY(0deg) translateY(-8px); }
-  @keyframes lp-scroll {
-    to { left: calc(-28rem * 1.1); }
+    z-index: 10;
   }
 
-  /* Texto hero encima */
-  .lp-hero-text {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    color: #fff;
-    padding: 0 1.5rem;
-    pointer-events: none;
-  }
-  .lp-tag {
-    display: inline-block;
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px; font-weight: 500;
-    letter-spacing: .18em; text-transform: uppercase;
-    color: var(--warm2);
-    border: 1px solid rgba(232,147,90,0.45);
-    border-radius: 3px;
-    padding: 4px 12px;
-    margin-bottom: 1.4rem;
-  }
-  .lp-title {
+  .willem__h1 {
+    display: flex;
+    align-items: center;
+    gap: 0;
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-size: clamp(3.5rem, 12vw, 8rem);
     font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: .8rem;
-    text-shadow: 0 4px 32px rgba(0,0,0,0.7);
+    color: #fff;
+    line-height: 1;
+    white-space: nowrap;
   }
-  .lp-title em {
+
+  .willem__h1-start,
+  .willem__h1-end {
+    display: flex;
+    gap: 0;
+  }
+
+  .willem__letter {
+    display: inline-block;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity;
+  }
+
+  /* ── Caja imagen creciente ── */
+  .willem-loader__box {
+    overflow: hidden;
+    width: 0;
+    height: 1.1em;
+    display: inline-flex;
+    align-items: stretch;
+    will-change: width;
+    vertical-align: bottom;
+    margin: 0 .04em;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .willem-loader__box-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .willem__growing-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .willem__growing-image-wrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Imágenes extra (desaparecen en stagger) */
+  .willem__cover-image-extra {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  /* Imagen final */
+  .willem__cover-image {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    will-change: transform, opacity;
+  }
+
+  /* ── CONTENIDO (fase revelada) ── */
+  .willem-header__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    will-change: opacity;
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  }
+
+  /* Fondo: imagen de portada cubriendo la sección */
+  .willem-header__content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.pexels.com/photos/19394891/pexels-photo-19394891.jpeg?auto=compress&cs=tinysrgb&w=1600&q=85') center/cover no-repeat;
+    z-index: -1;
+  }
+  .willem-header__content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,8,6,0.55) 0%,
+      rgba(10,8,6,0.25) 40%,
+      rgba(10,8,6,0.55) 100%
+    );
+    z-index: -1;
+  }
+
+  /* Nav top */
+  .willem-header__top {
+    padding: 1.5rem 2rem;
+  }
+
+  .willem-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .willem-nav__start,
+  .willem-nav__end {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .willem-nav__link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    letter-spacing: .02em;
+    display: inline-block;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .willem-nav__cta-link {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 99px;
+    padding: .4rem 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    transition: background .2s;
+  }
+  .willem-nav__cta-link:hover {
+    background: rgba(255,255,255,0.22);
+  }
+
+  /* Bottom: título + sub + cta */
+  .willem-header__bottom {
+    padding: 2.5rem 2rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .willem__bottom-left {
+    flex: 1;
+  }
+
+  /* Título grande revelado */
+  .willem__h1-final {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 700;
+    line-height: .95;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 .01em;
+    margin-bottom: .6rem;
+  }
+
+  .willem__letter-white {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(60px);
+    will-change: transform, opacity;
+  }
+  .willem__letter-white.is--amp {
+    margin: 0 .15em;
     color: var(--warm2);
     font-style: italic;
   }
-  .lp-sub {
+
+  .willem__sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(12px, 2vw, 14px);
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 1.5rem;
-    letter-spacing: .02em;
-  }
-  .lp-pills {
-    display: flex; flex-wrap: wrap; gap: .5rem;
-    justify-content: center;
-  }
-  .lp-pill {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 500;
-    padding: 5px 14px; border-radius: 99px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: rgba(255,255,255,0.8);
+    font-size: clamp(12px, 1.8vw, 14px);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: .04em;
+    opacity: 0;
+    will-change: opacity, transform;
+    margin-top: .5rem;
   }
 
-  /* Scroll down */
-  .lp-scroll-down {
-    position: absolute;
-    bottom: 2.5rem; left: 0; right: 0;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px; font-weight: 400;
-    color: rgba(255,255,255,0.5);
-    text-align: center;
+  /* CTA scroll */
+  .willem__scroll-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
-    display: flex; flex-direction: column; align-items: center; gap: .3rem;
-    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    opacity: 0;
+    will-change: opacity;
+    flex-shrink: 0;
+    padding-bottom: .25rem;
     transition: color .2s;
   }
-  .lp-scroll-down:hover { color: var(--warm2); }
-  .lp-arrow {
+  .willem__scroll-cta:hover { color: var(--warm2); }
+
+  .willem__arrow {
     display: block;
-    animation: lp-bounce .9s ease-in-out infinite alternate;
+    font-size: 1.4rem;
+    animation: willem-bounce .9s ease-in-out infinite alternate;
   }
-  @keyframes lp-bounce {
+  @keyframes willem-bounce {
     from { transform: translateY(0); }
-    to   { transform: translateY(6px); }
+    to   { transform: translateY(8px); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .willem__h1 {
+      font-size: clamp(2.4rem, 14vw, 4rem);
+    }
+    .willem-header__top { padding: 1rem 1.25rem; }
+    .willem-header__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+    }
+    .willem__h1-final {
+      font-size: clamp(2.6rem, 13vw, 4rem);
+    }
+    .willem__scroll-cta {
+      flex-direction: row;
+      gap: .5rem;
+    }
+    .willem-nav__links { display: none; }
+    .willem-loader__box { border-radius: 5px; }
   }
 
   /* ══════════════════════════════════════════
-     SECCIÓN 2: Parallax reveal
-     ══════════════════════════════════════════ */
-  .lp-reveal {
-    height: 60vw;
-    max-height: 680px;
-    min-height: 260px;
-    background: #000;
-    overflow: hidden;
-  }
-  .lp-reveal-img {
-    width: 100%; height: 100%;
-    transform-origin: 50% 0%;
-    transform: rotateX(90deg);
-  }
-  .lp-reveal-img img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* ══════════════════════════════════════════
-     SECCIÓN 3: Info del viaje
+     SECCIÓN 2: Info del viaje
      ══════════════════════════════════════════ */
   .lp-info {
     background: #0d0d0d;
@@ -307,13 +446,8 @@
     box-shadow: 0 8px 32px rgba(200,98,42,0.5);
   }
 
-  /* ── Responsive landing ── */
+  /* ── Responsive landing info section ── */
   @media (max-width: 640px) {
-    .lp-item { width: 18rem; height: 22rem; }
-    @keyframes lp-scroll { to { left: calc(-18rem * 1.1); } }
-
-    .lp-reveal { height: 70vw; max-height: 320px; }
-
     .lp-info { padding: 5rem 1.25rem 4rem; min-height: auto; }
     .lp-features {
       grid-template-columns: 1fr;
@@ -324,7 +458,6 @@
     .lp-feat-icon { font-size: 2rem; }
     .lp-feature h3 { font-size: 1rem; }
     .lp-info-body { font-size: 14px; }
-    .lp-scroll-down { bottom: 1.75rem; font-size: 12px; }
   }
 
   /* ── HEADER antiguo (ahora oculto, lo reemplaza la landing) ── */
@@ -754,54 +887,103 @@
 <!-- ══════════════════════════════════════════
      HERO — SECCIÓN 1: Carrusel infinito 3D
      ══════════════════════════════════════════ -->
-<section class="lp-carousel" id="lp-top">
-  <div class="lp-track" style="--time:55s;--total:12">
-    <div class="lp-item" style="--i:1"><img src="https://images.pexels.com/photos/2079619/pexels-photo-2079619.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Torre Gálata"></div>
-    <div class="lp-item" style="--i:2"><img src="https://images.pexels.com/photos/19394891/pexels-photo-19394891.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Mezquita Azul"></div>
-    <div class="lp-item" style="--i:3"><img src="https://images.pexels.com/photos/10748171/pexels-photo-10748171.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Ayasofya"></div>
-    <div class="lp-item" style="--i:4"><img src="https://images.pexels.com/photos/5700576/pexels-photo-5700576.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Globos Capadocia"></div>
-    <div class="lp-item" style="--i:5"><img src="https://images.pexels.com/photos/28958176/pexels-photo-28958176.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Ortaköy"></div>
-    <div class="lp-item" style="--i:6"><img src="https://images.pexels.com/photos/13653612/pexels-photo-13653612.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Chimeneas de hadas"></div>
-    <div class="lp-item" style="--i:7"><img src="https://images.pexels.com/photos/18472197/pexels-photo-18472197.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Balat"></div>
-    <div class="lp-item" style="--i:8"><img src="https://images.pexels.com/photos/30818657/pexels-photo-30818657.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Ferry Bósforo"></div>
-    <div class="lp-item" style="--i:9"><img src="https://images.pexels.com/photos/20239014/pexels-photo-20239014.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Cisterna Basílica"></div>
-    <div class="lp-item" style="--i:10"><img src="https://images.pexels.com/photos/5096971/pexels-photo-5096971.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Bazar de las Especias"></div>
-    <div class="lp-item" style="--i:11"><img src="https://images.pexels.com/photos/5320133/pexels-photo-5320133.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Atardecer Capadocia"></div>
-    <div class="lp-item" style="--i:12"><img src="https://images.pexels.com/photos/23230957/pexels-photo-23230957.jpeg?auto=compress&cs=tinysrgb&w=900&q=85" alt="Atardecer Estambul"></div>
-  </div>
+<!-- ══════════════════════════════════════════
+     WILLEM HEADER — Loading animation
+     ══════════════════════════════════════════ -->
+<section class="willem-header is--loading is--hidden">
 
-  <div class="lp-hero-text">
-    <div class="lp-tag">Erasmus · 9 personas · Abril 2026</div>
-    <h1 class="lp-title">Estambul<br><em>&amp; Capadocia</em></h1>
-    <p class="lp-sub">9 – 14 Abril · Viena → SAW · Bus nocturno → Göreme · Kayseri → Viena</p>
-    <div class="lp-pills">
-      <span class="lp-pill">6 días · 5 noches</span>
-      <span class="lp-pill">~200€ sin vuelos</span>
-      <span class="lp-pill">Semana Santa</span>
+  <!-- LOADER: "Estambul" con imagen creciendo en el medio -->
+  <div class="willem-loader">
+    <div class="willem__h1">
+      <div class="willem__h1-start">
+        <span class="willem__letter">E</span>
+        <span class="willem__letter">s</span>
+        <span class="willem__letter">t</span>
+        <span class="willem__letter">a</span>
+        <span class="willem__letter">m</span>
+      </div>
+      <div class="willem-loader__box">
+        <div class="willem-loader__box-inner">
+          <div class="willem__growing-image">
+            <div class="willem__growing-image-wrap">
+              <!-- 3 imágenes extra que desaparecen en stagger -->
+              <img class="willem__cover-image-extra is--1" src="https://images.pexels.com/photos/5700576/pexels-photo-5700576.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" loading="eager" alt="Globos Capadocia">
+              <img class="willem__cover-image-extra is--2" src="https://images.pexels.com/photos/13653612/pexels-photo-13653612.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" loading="eager" alt="Chimeneas de hadas">
+              <img class="willem__cover-image-extra is--3" src="https://images.pexels.com/photos/28958176/pexels-photo-28958176.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" loading="eager" alt="Ortaköy">
+              <!-- Imagen final que se queda y llena la pantalla -->
+              <img class="willem__cover-image" src="https://images.pexels.com/photos/19394891/pexels-photo-19394891.jpeg?auto=compress&cs=tinysrgb&w=1600&q=85" loading="eager" alt="Mezquita Azul Estambul">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="willem__h1-end">
+        <span class="willem__letter">b</span>
+        <span class="willem__letter">u</span>
+        <span class="willem__letter">l</span>
+      </div>
     </div>
   </div>
 
-  <a class="lp-scroll-down" href="#lp-reveal" aria-label="Scroll">
-    Scroll <span class="lp-arrow">↓</span>
-  </a>
-</section>
+  <!-- CONTENIDO revelado tras el loader -->
+  <div class="willem-header__content">
+    <!-- Top: fecha + pills -->
+    <div class="willem-header__top">
+      <nav class="willem-nav">
+        <div class="willem-nav__start">
+          <span class="willem-nav__link">Erasmus 2026 ©</span>
+        </div>
+        <div class="willem-nav__end">
+          <div class="willem-nav__links">
+            <span class="willem-nav__link">9 personas,</span>
+            <span class="willem-nav__link">6 días,</span>
+            <span class="willem-nav__link">~200€</span>
+          </div>
+          <div class="willem-nav__cta">
+            <a href="#antes" class="willem-nav__link willem-nav__cta-link">Ver itinerario</a>
+          </div>
+        </div>
+      </nav>
+    </div>
 
-<!-- ══════════════════════════════════════════
-     SECCIÓN 2: Imagen parallax reveal
-     ══════════════════════════════════════════ -->
-<section class="lp-reveal" id="lp-reveal">
-  <div class="lp-reveal-img">
-    <img src="https://images.pexels.com/photos/11010086/pexels-photo-11010086.jpeg?auto=compress&cs=tinysrgb&w=2400&q=90" alt="Bósforo Estambul panorámica">
+    <!-- Bottom: título grande + carrusel -->
+    <div class="willem-header__bottom">
+      <div class="willem__bottom-left">
+        <div class="willem__h1-final">
+          <span class="willem__letter-white">E</span>
+          <span class="willem__letter-white">s</span>
+          <span class="willem__letter-white">t</span>
+          <span class="willem__letter-white">a</span>
+          <span class="willem__letter-white">m</span>
+          <span class="willem__letter-white">b</span>
+          <span class="willem__letter-white">u</span>
+          <span class="willem__letter-white">l</span>
+          <span class="willem__letter-white is--amp">&amp;</span>
+          <span class="willem__letter-white">C</span>
+          <span class="willem__letter-white">a</span>
+          <span class="willem__letter-white">p</span>
+          <span class="willem__letter-white">a</span>
+          <span class="willem__letter-white">d</span>
+          <span class="willem__letter-white">o</span>
+          <span class="willem__letter-white">c</span>
+          <span class="willem__letter-white">i</span>
+          <span class="willem__letter-white">a</span>
+        </div>
+        <p class="willem__sub">9 – 14 Abril · Viena → SAW → Göreme → Kayseri → Viena</p>
+      </div>
+      <a href="#antes" class="willem__scroll-cta">
+        Ver itinerario <span class="willem__arrow">↓</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════
-     SECCIÓN 3: Info del viaje
+     SECCIÓN 2: Info del viaje (fondo oscuro)
      ══════════════════════════════════════════ -->
 <section class="lp-info" id="lp-info">
   <div class="lp-info-inner">
     <p class="lp-info-tag">◆ El viaje ◆</p>
-    <h2 class="lp-info-title">6 días que no<br>olvaréis</h2>
+    <h2 class="lp-info-title">6 días que no<br>olvidaréis</h2>
     <p class="lp-info-body">Estambul te parte en dos: el caos de los bazares, el Bósforo al atardecer, los gatos de Cihangir. Luego un bus nocturno te escupe en Capadocia, donde el cielo se llena de 150 globos antes de que salga el sol. Todo eso por menos de lo que cuesta un fin de semana en Berlín.</p>
     <p class="lp-info-body">Desplázate para ver el itinerario día a día, los mejores sitios donde comer, cómo moverse sin dejarte la pasta y todo lo que hay que reservar ya.</p>
     <div class="lp-features">
@@ -1725,6 +1907,124 @@ function toggleAcc(head) {
 document.querySelectorAll('.tl-photo, .tl-photo-route').forEach(function(img) {
   img.addEventListener('error', function() { this.style.display = 'none'; });
 });
+
+// ── Willem Loading Animation ──
+function initWillemLoadingAnimation() {
+  var header = document.querySelector('.willem-header');
+  if (!header || typeof gsap === 'undefined') return;
+
+  var letters = header.querySelectorAll('.willem__h1 .willem__letter');
+  var box = header.querySelector('.willem-loader__box');
+  var extras = header.querySelectorAll('.willem__cover-image-extra');
+  var mainImg = header.querySelector('.willem__cover-image');
+  var content = header.querySelector('.willem-header__content');
+  var navLinks = header.querySelectorAll('.willem-nav__link');
+  var titleLetters = header.querySelectorAll('.willem__letter-white');
+  var sub = header.querySelector('.willem__sub');
+  var cta = header.querySelector('.willem__scroll-cta');
+  var loader = header.querySelector('.willem-loader');
+
+  // Precompute box target width (same as font height)
+  var fontSize = parseFloat(getComputedStyle(header.querySelector('.willem__h1')).fontSize) || 80;
+
+  // Initial state
+  gsap.set(box, { width: 0 });
+  gsap.set(extras, { opacity: 0 });
+  gsap.set(mainImg, { opacity: 0 });
+
+  var tl = gsap.timeline({ delay: 0.1 });
+
+  // 1. Letters drop in
+  tl.from(letters, {
+    y: '120%', opacity: 0,
+    duration: 0.6, stagger: 0.045,
+    ease: 'power3.out'
+  });
+
+  // 2. Box grows wide
+  tl.to(box, {
+    width: fontSize * 1.05,
+    duration: 0.55,
+    ease: 'power2.inOut'
+  }, '-=0.1');
+
+  // 3. Extra images flash in staggered
+  tl.to(extras, {
+    opacity: 1,
+    duration: 0.18,
+    stagger: 0.18,
+    ease: 'none'
+  }, '-=0.1');
+
+  // 4. Extra images fade out
+  tl.to(extras, {
+    opacity: 0,
+    duration: 0.18,
+    stagger: 0.1,
+    ease: 'none'
+  });
+
+  // 5. Main image fades in
+  tl.to(mainImg, {
+    opacity: 1,
+    duration: 0.3,
+    ease: 'power2.out'
+  }, '-=0.1');
+
+  // 6. Pause a beat, then box + loader expand to full screen
+  tl.to(box, {
+    width: '300vw', height: '300vh',
+    borderRadius: 0,
+    duration: 0.75,
+    ease: 'power2.inOut'
+  }, '+=0.35');
+
+  tl.to(loader, {
+    opacity: 0,
+    duration: 0.35,
+    ease: 'power2.in'
+  }, '-=0.2');
+
+  // 7. Content reveal
+  tl.set(content, { opacity: 1 }, '-=0.1');
+  tl.set(header, { background: 'transparent' });
+
+  // Nav links
+  tl.from(navLinks, {
+    opacity: 0, y: -12,
+    duration: 0.45, stagger: 0.07,
+    ease: 'power2.out'
+  }, '-=0.15');
+
+  // Title letters
+  tl.to(titleLetters, {
+    opacity: 1, y: 0,
+    duration: 0.6, stagger: 0.03,
+    ease: 'power3.out'
+  }, '-=0.3');
+
+  // Sub + cta
+  tl.to([sub, cta], {
+    opacity: 1, y: 0,
+    duration: 0.5, stagger: 0.12,
+    ease: 'power2.out'
+  }, '-=0.2');
+
+  // 8. After full reveal, unpin and scroll normally
+  tl.call(function() {
+    document.body.classList.remove('willem-loading');
+    header.style.position = 'relative';
+    header.style.height = '100svh';
+    header.style.minHeight = '560px';
+    header.style.zIndex = '';
+    header.classList.remove('is--hidden');
+  });
+}
+
+// Run after GSAP loads
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.classList.add('willem-loading');
+});
 </script>
 
 <!-- GSAP + ScrollTrigger + Lenis para animaciones landing -->
@@ -1743,20 +2043,10 @@ document.querySelectorAll('.tl-photo, .tl-photo-route').forEach(function(img) {
   gsap.ticker.add(function(t) { lenis.raf(t * 1000); });
   gsap.ticker.lagSmoothing(0);
 
-  // Sección 2: imagen parallax reveal al hacer scroll
-  gsap.set('.lp-reveal-img', { rotateX: 90 });
-  gsap.to('.lp-reveal-img', {
-    rotateX: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.lp-reveal',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 0.6,
-    }
-  });
+  // Willem loading animation
+  initWillemLoadingAnimation();
 
-  // Sección 3: título, textos y tarjetas
+  // Sección info: título, textos y tarjetas
   gsap.fromTo('.lp-info-tag', { opacity: 0, y: 20 }, {
     opacity: 1, y: 0, duration: .7, ease: 'power3.out',
     scrollTrigger: { trigger: '.lp-info', start: 'top 80%', toggleActions: 'play none none reverse' }
