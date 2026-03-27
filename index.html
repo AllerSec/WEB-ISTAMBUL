@@ -294,7 +294,7 @@
   .tl-photo {
     width: 100%;
     height: auto;
-    max-height: 420px;
+    max-height: 480px;
     object-fit: cover;
     object-position: center;
     border-radius: 10px;
@@ -302,7 +302,21 @@
     display: block;
     border: 1px solid var(--sand2);
     background: var(--sand);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  }
+  /* Foto de trayecto/transporte: banner apaisado */
+  .tl-photo-route {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    margin: .4rem 0 .5rem;
+    display: block;
+    border: 1px solid var(--sand2);
+    background: var(--sand);
+    opacity: 0.88;
+    filter: saturate(0.85);
   }
 
   /* ── APPS ── */
@@ -402,6 +416,7 @@
 
     /* Fotos: sin altura máxima excesiva en móvil */
     .tl-photo { max-height: 260px; border-radius: 8px; }
+    .tl-photo-route { height: 110px; }
 
     /* Day cards */
     .day-card { border-radius: 12px; }
@@ -592,6 +607,7 @@
           <div class="tl-left"><div class="tl-time">15:15</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Bus Havabus SAW → Taksim</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/11010086/pexels-photo-11010086.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Bósforo visto desde el aeropuerto de camino a Taksim" loading="lazy">
             <div class="tl-desc">Salid por la puerta 9 o 13 de llegadas y coged el <strong>Havabus directo a Taksim</strong> (~7€ por persona). Sale cada 30 min. Trayecto: 70–110 min según tráfico. Es el transporte más cómodo para 9 con maletas — hay portaequipajes. Alternativa: metro M4 a Kadıköy + ferry a Eminönü (más barato, 1h45 con transbordos, mejor sin maletas grandes).</div>
             <div class="tl-tags"><span class="tag move">Havabus ~7€/persona</span><span class="tag tip">70–110 min</span></div>
           </div>
@@ -608,7 +624,7 @@
           <div class="tl-left"><div class="tl-time">17:45</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Paseo por İstiklal Caddesi → Torre Gálata</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/29069777/pexels-photo-29069777.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Torre Gálata" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/2079619/pexels-photo-2079619.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Torre Gálata Estambul" loading="lazy">
             <div class="tl-desc">La gran avenida peatonal de Beyoğlu: 1,5 km de tiendas, música callejera y gente. Bajad hasta la <strong>Torre Gálata</strong> (no hace falta subir, se ve perfecta desde fuera). Por el camino comprad un <em>Simit</em> (rosquilla de sésamo, ~0,30€) en cualquier carrito callejero.</div>
             <div class="tl-tags"><span class="tag see">İstiklal Caddesi</span><span class="tag see">Torre Gálata</span><span class="tag eat">Simit 0,30€</span></div>
           </div>
@@ -625,7 +641,7 @@
           <div class="tl-left"><div class="tl-time">21:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Primera noche: Nevizade Sokak y Asmalımescit</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/30637942/pexels-photo-30637942.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="İstiklal Caddesi noche" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/30637932/pexels-photo-30637932.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Tranvía rojo İstiklal Caddesi" loading="lazy">
             <div class="tl-desc">Dos callejuelas adyacentes en Beyoğlu con bares de tapas en la calle, mesas en la acera y cervezas Efes a buen precio. Ambiente turco auténtico — ni demasiado turístico ni demasiado local. Ideal para la primera noche: accesible desde el hostal andando.</div>
             <div class="tl-tags"><span class="tag night">Nevizade Sokak</span><span class="tag night">Asmalımescit</span><span class="tag">Cerveza Efes ~2€</span></div>
           </div>
@@ -675,6 +691,7 @@
           <div class="tl-left"><div class="tl-time">09:15</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Tranvía T1 → Sultanahmet (20 min)</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/30637932/pexels-photo-30637932.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Tranvía rojo İstiklal Estambul" loading="lazy">
             <div class="tl-desc">Coged el tranvía T1 desde Karaköy o Kabataş hasta la parada Sultanahmet. Usad la IstanbulKart.</div>
             <div class="tl-tags"><span class="tag move">Tranvía T1 ~0,40€</span></div>
           </div>
@@ -683,7 +700,7 @@
           <div class="tl-left"><div class="tl-time">09:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Mezquita Azul (Sultan Ahmet Camii) — GRATIS</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/7552672/pexels-photo-7552672.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Mezquita Azul" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/19394891/pexels-photo-19394891.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Mezquita Azul Sultan Ahmed" loading="lazy">
             <div class="tl-desc">La entrada es gratuita. Cubrid hombros y piernas (hay pañuelos en la entrada). Tiempo dentro: 30–40 min. Las 6 minaretes desde fuera son igual de impresionantes — si la cola es larguísima, valorad verla desde la plaza y entrar a Ayasofya.</div>
             <div class="tl-tags"><span class="tag see">Mezquita Azul</span><span class="tag ok">Gratis</span><span class="tag">30–45 min</span></div>
           </div>
@@ -731,7 +748,7 @@
           <div class="tl-left"><div class="tl-time">15:15</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Bazar de las Especias (Mısır Çarşısı)</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/14284634/pexels-photo-14284634.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Bazar de las Especias" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/5096971/pexels-photo-5096971.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Bazar de las Especias Estambul" loading="lazy">
             <div class="tl-desc">A 10 min andando por callejuelas llenas de especias, frutos secos, lokum (Turkish delight) y té. Mucho más auténtico que el Gran Bazar. Aquí sí podéis comprar souvenirs a buen precio — regatead sin miedo (ofertad el 50% del precio pedido).</div>
             <div class="tl-tags"><span class="tag see">Bazar de las Especias</span><span class="tag eat">Lokum, frutos secos</span><span class="tag">30 min</span></div>
           </div>
@@ -740,7 +757,7 @@
           <div class="tl-left"><div class="tl-time">16:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Ferry del Bósforo LOW-COST ⭐</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/33858294/pexels-photo-33858294.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Ferry del Bósforo" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/30818657/pexels-photo-30818657.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Ferry cruzando el Bósforo" loading="lazy">
             <div class="tl-desc">Bajad al muelle de <strong>Eminönü</strong> y coged el ferry público de <strong>Şehir Hatları</strong> con la IstanbulKart (~0,80€). Los ferrys de la compañía Turyol van hasta Üsküdar (lado asiático). El trayecto dura 20–30 min y tenéis vistas del Bósforo, el palacio de Topkapı y la silueta de la ciudad. <strong>No paguéis los "tours del Bósforo" de los tipos que gritan en el muelle — son caros y este ferry hace lo mismo.</strong></div>
             <div class="tl-tags"><span class="tag move">Ferry público ~0,80€</span><span class="tag see">Vistas del Bósforo</span><span class="tag ok">El mejor low-cost del viaje</span></div>
           </div>
@@ -764,7 +781,7 @@
           <div class="tl-left"><div class="tl-time">20:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Noche en Kadıköy (lado asiático) 🎉</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/17050562/pexels-photo-17050562.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Kadıköy Estambul" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/28601284/pexels-photo-28601284.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Estambul skyline nocturno" loading="lazy">
             <div class="tl-desc">Cruzad en ferry desde Eminönü o Kabataş a <strong>Kadıköy</strong> (~0,80€). Es el barrio universitario/hipster por excelencia: la cerveza es más barata, el ambiente es joven y alternativo, y la gente es local de verdad. Id a la zona de <strong>Kadife Sokak</strong> (la "calle de los bares") — barras en la acera, música en vivo, mezcla de turcos y guiris.<br><br>
             ⚠️ <strong>Atención al regreso:</strong> El último ferry regular a las ~23:30–00:30. Si os quedáis hasta tarde, lo más barato es compartir 2–3 taxis amarillos o usar BiTaksi. Con 9 personas: 3 taxis × ~10–12€ = ~3–4€/persona.</div>
             <div class="tl-tags"><span class="tag night">Kadife Sokak</span><span class="tag move">Ferry ~0,80€</span><span class="tag">Cerveza Efes ~1,5–2€</span></div>
@@ -812,6 +829,7 @@
           <div class="tl-left"><div class="tl-time">13:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Bus/tranvía a Ortaköy (30 min)</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/30818657/pexels-photo-30818657.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Ferry cruzando el Bósforo hacia Ortaköy" loading="lazy">
             <div class="tl-desc">Coged el autobús 22 o 22E desde Kabataş a Ortaköy. O taxi compartido (~5€ para los 9 en 2 taxis).</div>
             <div class="tl-tags"><span class="tag move">Bus 22/22E con IstanbulKart</span></div>
           </div>
@@ -837,7 +855,7 @@
           <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Atardecer en Rooftop ⭐</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/27107828/pexels-photo-27107828.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Atardecer Cuerno de Oro Estambul" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/23230957/pexels-photo-23230957.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Atardecer Cuerno de Oro puente metro Estambul" loading="lazy">
             <div class="tl-desc">Hay varios rooftops con vistas brutales al Cuerno de Oro desde Beyoğlu. <strong>Monkey Istanbul</strong> o <strong>360 Istanbul</strong> son los más conocidos. Los cócteles cuestan ~8–12€ pero la vista (sol poniéndose sobre Sultanahmet y el Bósforo) no tiene precio. Reservad mesa si vais los 9.</div>
             <div class="tl-tags"><span class="tag see">Vistas al Cuerno de Oro</span><span class="tag night">Cóctel ~8–12€</span></div>
           </div>
@@ -890,7 +908,7 @@
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Barrios de Balat y Fener ⭐</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/28995497/pexels-photo-28995497.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Balat casas de colores Estambul" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/18472197/pexels-photo-18472197.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Balat casas de colores Estambul" loading="lazy">
             <div class="tl-desc">Los antiguos barrios judío y griego de Estambul son lo más fotogénico e instagrameable de la ciudad. Casas de colores, calles empinadas, gatos por todos lados, cafeterías vintage y tiendas de segunda mano. Completamente fuera de las rutas turísticas estándar. Coged el tranvía T1 hasta Eminönü y luego bus hasta Balat (20 min total).<br><br>
             Imprescindibles: <em>Balat Merdivenler</em> (escaleras coloridas), la <em>Iglesia de los Búlgaros</em> (hierro forjado único en el mundo), el <em>Mercadillo de Balat</em>.</div>
             <div class="tl-tags"><span class="tag see">Balat + Fener</span><span class="tag tip">Joya escondida</span><span class="tag">2 horas</span></div>
@@ -924,6 +942,7 @@
           <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Traslado a Esenler Otogar 🚌</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/28601284/pexels-photo-28601284.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Estambul de noche camino al otogar" loading="lazy">
             <div class="tl-desc"><strong>Usad Esenler Otogar</strong> (también llamado Büyük Istanbul Otogarı o 15 Temmuz Otogarı) — es el otogar principal del lado europeo. Metro <strong>M1A o M1B</strong> desde Yenikapı o Aksaray hasta la parada "Otogar" — 30–40 min, muy directo con maletas.<br><br>
             Llegad a la estación con <strong>al menos 45–60 min de antelación</strong> para encontrar la compañía y el andén correcto. La estación es enorme (271 compañías de buses). Buscad el andén de vuestra compañía (Nevşehir Seyahat, Metro Turizm o Kamil Koç).</div>
             <div class="tl-tags"><span class="tag bus">Metro M1A → "Otogar"</span><span class="tag">~0,40€</span></div>
@@ -933,6 +952,7 @@
           <div class="tl-left"><div class="tl-time">21:50</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Bus nocturno → Göreme 🌙</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/5320133/pexels-photo-5320133.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Paisaje nocturno rumbo a Capadocia" loading="lazy">
             <div class="tl-desc">Salida. Duración: 9h 20 min. Los buses turcos son modernos: asientos reclinables amplios, pantalla individual, WiFi y azafato que sirve agua, galletas y bebidas periódicamente. Dormid todo lo que podáis. Llegada a Göreme: 07:10 del día 13.</div>
             <div class="tl-tags"><span class="tag bus">Bus nocturno ~25–35€</span><span class="tag tip">Nevşehir Seyahat recomendado</span></div>
           </div>
@@ -1000,7 +1020,7 @@
           <div class="tl-left"><div class="tl-time">10:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Quads (ATV) por los valles ⭐⭐</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/13291644/pexels-photo-13291644.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Love Valley Capadocia" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/13653612/pexels-photo-13653612.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Chimeneas de Hadas Capadocia" loading="lazy">
             <div class="tl-desc">La actividad reina para un grupo de 9. Alquilad ATVs (quads) en la calle principal de Göreme — hay decenas de empresas. Al ser 9, negociad un precio en bloque. Precio aproximado: <strong>25–40€ por quad/hora</strong>. Con 9 personas necesitáis 5 quads mínimo (algunos son dobles).<br><br>
             Ruta recomendada (2–2,5h): <strong>Love Valley → Rose Valley → Sword Valley → Devrent Valley</strong>. Los mapas están en papel en la empresa. No hace falta guía — seguid las pistas de tierra.<br><br>
             ⚠️ En Semana Santa: reservad con días de antelación. Si llegáis el día antes sin reserva, podéis quedaros sin quads.</div>
@@ -1035,7 +1055,7 @@
           <div class="tl-left"><div class="tl-time">18:30</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Sunset Point (Aşıklar Tepesi) ⭐⭐</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/19328648/pexels-photo-19328648.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Atardecer Capadocia formaciones rocosas" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/5320133/pexels-photo-5320133.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Atardecer Capadocia valles" loading="lazy">
             <div class="tl-desc">El mirador al atardecer de Göreme. Está a 15 min andando cuesta arriba desde el centro — id con tiempo. Hay un pequeño peaje simbólico (~ 1–2€) para entrar. Cuando el sol se pone sobre los valles y las chimeneas de hadas se tiñen de rojo y naranja es una de las imágenes más impresionantes de Turquía. Llevad cerveza comprada en el supermercado (~1€ la lata) y disfrutad.</div>
             <div class="tl-tags"><span class="tag see">Sunset Point</span><span class="tag tip">El mejor atardecer del viaje</span><span class="tag eat">Cerveza supermercado ~1€</span></div>
           </div>
@@ -1083,7 +1103,7 @@
           <div class="tl-left"><div class="tl-time">06:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">El amanecer con los globos — desde la terraza 🎈</div>
-            <img class="tl-photo" src="https://images.pexels.com/photos/34376627/pexels-photo-34376627.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Globos aerostáticos al amanecer Capadocia" loading="lazy">
+            <img class="tl-photo" src="https://images.pexels.com/photos/5700576/pexels-photo-5700576.jpeg?auto=compress&cs=tinysrgb&w=3840&q=90" alt="Globos aerostáticos al amanecer Capadocia" loading="lazy">
             <div class="tl-desc">Subid a la terraza del hostal en pijama con una manta. A partir de las 06:00–06:15 el cielo de Göreme se llena de 100–150 globos aerostáticos encendiéndose y elevándose. Desde una terraza cueva en el centro de Göreme tenéis la misma imagen que desde un globo (sin pagar los 150–250€). Es completamente gratis y es posiblemente la imagen más bonita del viaje.</div>
             <div class="tl-tags"><span class="tag see">Globos desde la terraza</span><span class="tag ok">Completamente gratis</span><span class="tag tip">La joya del viaje</span></div>
           </div>
@@ -1099,6 +1119,7 @@
           <div class="tl-left"><div class="tl-time">07:00</div><div class="tl-line"></div></div>
           <div class="tl-content">
             <div class="tl-title">Shuttle Göreme → Kayseri Airport 🚐</div>
+            <img class="tl-photo-route" src="https://images.pexels.com/photos/13653612/pexels-photo-13653612.jpeg?auto=compress&cs=tinysrgb&w=2400&q=85" alt="Chimeneas de hadas al amanecer saliendo de Göreme" loading="lazy">
             <div class="tl-desc">Os recoge en el hostal. Trayecto: ~1h–1h15 (80 km). Llegada al aeropuerto: ~08:15–08:30. Con vuelo a las 09:30 tenéis tiempo suficiente para el check-in, seguridad y cafetería.</div>
             <div class="tl-tags"><span class="tag bus">Shuttle privado ~90–100€ total / 10€/persona</span><span class="tag">Reservado el día anterior</span></div>
           </div>
