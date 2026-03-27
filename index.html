@@ -1994,17 +1994,19 @@ function initWillemLoadingAnimation(onComplete) {
   // 4. Main image
   tl.to(mainImg, { opacity: 1, duration: 0.28, ease: 'power2.out' }, '-=0.08');
 
-  // 5. Expand to fullscreen
+  // 5. Expand box to exactly cover the screen (no over-zoom)
   tl.to(box, {
-    width: '350vw', height: '350vh',
+    width: '100vw', height: '100vh',
     borderRadius: 0,
-    duration: 0.7,
+    duration: 0.65,
     ease: 'power2.inOut'
   }, '+=0.3');
-  tl.to(loader, { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.2');
+
+  // Fade out the whole loader (box + text) together
+  tl.to(loader, { opacity: 0, duration: 0.4, ease: 'power2.in' }, '-=0.15');
 
   // 6. Reveal content
-  tl.set(content, { opacity: 1 }, '-=0.05');
+  tl.set(content, { opacity: 1 });
   tl.set(header, { background: 'transparent' });
 
   tl.from(navLinks, {
@@ -2049,12 +2051,14 @@ function initWillemLoadingAnimation(onComplete) {
 
   // Willem loading animation — start Lenis only after it completes
   initWillemLoadingAnimation(function() {
+    // Reset scroll to top before Lenis takes over
+    window.scrollTo(0, 0);
+
     if (typeof Lenis !== 'undefined') {
       var lenis = new Lenis({ lerp: 0.08, smoothWheel: true, touchMultiplier: 2 });
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(function(t) { lenis.raf(t * 1000); });
       gsap.ticker.lagSmoothing(0);
-      ScrollTrigger.refresh();
     }
   });
 
