@@ -38,9 +38,7 @@
      LOADING SCREEN
      ══════════════════════════════════════════ */
 
-  body.is-loading { overflow: hidden; }
-
-  /* Full-screen loader overlay */
+  /* Loader: fixed overlay, always on top */
   .loader-screen {
     position: fixed;
     inset: 0;
@@ -50,11 +48,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0;
-    pointer-events: none;
+    overflow: hidden;
+    clip-path: inset(0 0 0% 0); /* GSAP animates bottom value to 100% */
   }
 
-  /* "ESTAMBUL" logotype with image slot */
+  /* "ESTAMBUL" with image pill */
   .loader-title {
     display: flex;
     align-items: center;
@@ -66,11 +64,13 @@
     white-space: nowrap;
     position: relative;
     z-index: 2;
+    /* Letters start invisible — set by inline style to avoid flash */
   }
 
   .loader-title__letter {
     display: inline-block;
-    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(60%);
   }
 
   /* Image pill between syllables */
@@ -79,12 +79,11 @@
     width: 0;
     height: 1em;
     vertical-align: bottom;
-    border-radius: 0.5em;
+    border-radius: 0.45em;
     overflow: hidden;
     position: relative;
     margin: 0 0.05em;
     flex-shrink: 0;
-    will-change: width, border-radius;
   }
 
   .loader-pill img {
@@ -92,13 +91,6 @@
     inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    transform: scale(1.08);
-    will-change: transform, opacity;
-  }
-  .loader-pill img.is-extra {
-    opacity: 0;
-  }
-  .loader-pill img.is-main {
     opacity: 0;
   }
 
@@ -109,7 +101,6 @@
     height: 2px;
     width: 0%;
     background: linear-gradient(90deg, var(--warm), var(--warm2));
-    will-change: width;
   }
 
   /* ══════════════════════════════════════════
@@ -155,10 +146,16 @@
     height: 100%;
     padding:
       calc(1.5rem + env(safe-area-inset-top, 0px))
-      env(safe-area-inset-right, 2rem)
+      max(2rem, env(safe-area-inset-right, 2rem))
       calc(2.5rem + env(safe-area-inset-bottom, 0px))
-      env(safe-area-inset-left, 2rem);
-    /* Start invisible — revealed by GSAP */
+      max(2rem, env(safe-area-inset-left, 2rem));
+  }
+
+  /* Nav links and bottom elements start hidden — revealed by GSAP */
+  .willem-nav__link,
+  .willem__letter-white,
+  .willem__sub,
+  .willem__scroll-cta {
     opacity: 0;
   }
 
@@ -238,7 +235,7 @@
 
   .willem__letter-white {
     display: inline-block;
-    will-change: transform, opacity;
+    transform: translateY(50px);
   }
   .willem__letter-white.is--amp {
     color: var(--warm2);
@@ -1936,95 +1933,90 @@ document.querySelectorAll('.tl-photo, .tl-photo-route').forEach(function(img) {
 });
 
 // ── Loading Animation ──
+// Called after GSAP is loaded. Uses a sequential timeline (no absolute times)
+// so nothing can desync regardless of frame rate.
 function initLoadingAnimation(onComplete) {
-  var loaderEl   = document.getElementById('loaderScreen');
-  var pill       = document.getElementById('loaderPill');
-  var bar        = document.getElementById('loaderBar');
-  var letters    = document.querySelectorAll('#loaderTitle .loader-title__letter');
-  var extras     = pill ? pill.querySelectorAll('img.is-extra') : [];
-  var mainImg    = pill ? pill.querySelector('img.is-main') : null;
-  var heroContent = document.getElementById('heroContent');
-  var navLinks   = document.querySelectorAll('.willem-nav .willem-nav__link');
+  var loader  = document.getElementById('loaderScreen');
+  var pill    = document.getElementById('loaderPill');
+  var bar     = document.getElementById('loaderBar');
+  var letters = document.querySelectorAll('#loaderTitle .loader-title__letter');
+  var imgs    = pill ? pill.querySelectorAll('img') : [];
+  var navLinks     = document.querySelectorAll('.willem-nav__link');
   var titleLetters = document.querySelectorAll('.willem__letter-white');
-  var sub        = document.querySelector('.willem__sub');
-  var cta        = document.getElementById('heroScrollCta');
+  var sub  = document.querySelector('.willem__sub');
+  var cta  = document.getElementById('heroScrollCta');
 
-  if (!loaderEl || !pill) { if (onComplete) onComplete(); return; }
+  if (!loader || !pill || !imgs.length) {
+    if (onComplete) onComplete();
+    return;
+  }
+
+  // Block scroll while loader is visible
+  document.documentElement.style.overflow = 'hidden';
 
   var em = parseFloat(getComputedStyle(document.getElementById('loaderTitle')).fontSize) || 72;
 
-  // Initial states
-  document.body.classList.add('is-loading');
-  gsap.set(pill,    { width: 0 });
-  gsap.set(extras,  { opacity: 0 });
-  gsap.set(mainImg, { opacity: 0 });
-  gsap.set(titleLetters, { opacity: 0, y: 40 });
-  gsap.set([sub, cta],   { opacity: 0, y: 16 });
-  gsap.set(heroContent,  { opacity: 0 });
+  // ── Sequential timeline ──────────────────────────────────────────────────
+  var tl = gsap.timeline({
+    onComplete: function() {
+      loader.style.display = 'none';
+      document.documentElement.style.overflow = '';
+      window.scrollTo(0, 0);
+      if (onComplete) onComplete();
+    }
+  });
 
-  var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-  // ① Progress bar fills while letters arrive
-  tl.to(bar, { width: '60%', duration: 1.2, ease: 'power1.inOut' }, 0);
-
-  // ② Letters drop in from below
-  tl.from(letters, {
-    y: '105%', opacity: 0,
-    duration: 0.6, stagger: 0.045,
+  // 1. Letters animate up one by one
+  tl.to(letters, {
+    opacity: 1, y: 0,
+    duration: 0.5, stagger: 0.05,
     ease: 'power3.out'
-  }, 0.05);
+  });
 
-  // ③ Pill opens to one character width
+  // 2. Pill grows open
   tl.to(pill, {
-    width: em * 1.0,
-    duration: 0.5, ease: 'expo.out'
-  }, 0.35);
+    width: em,
+    duration: 0.45,
+    ease: 'expo.out'
+  }, '-=0.2');
 
-  // ④ Images cycle inside pill
-  tl.to(extras[0], { opacity: 1, duration: 0.2 }, 0.55);
-  tl.to(extras[0], { opacity: 0, duration: 0.2 }, 0.9);
-  tl.to(extras[1], { opacity: 1, duration: 0.2 }, 0.9);
-  tl.to(extras[1], { opacity: 0, duration: 0.2 }, 1.2);
-  tl.to(extras[2], { opacity: 1, duration: 0.2 }, 1.2);
-  tl.to(extras[2], { opacity: 0, duration: 0.2 }, 1.5);
-  tl.to(mainImg,   { opacity: 1, duration: 0.3  }, 1.5);
+  // 3. Images cycle (crossfade)
+  Array.from(imgs).forEach(function(img, i) {
+    var isLast = i === imgs.length - 1;
+    tl.to(img, { opacity: 1, duration: 0.2, ease: 'none' });
+    if (!isLast) tl.to(img, { opacity: 0, duration: 0.2, ease: 'none' }, '+=0.18');
+  });
 
-  // ⑤ Bar completes
-  tl.to(bar, { width: '100%', duration: 0.35, ease: 'power2.inOut' }, 1.6);
+  // 4. Progress bar fills to 100%
+  tl.to(bar, { width: '100%', duration: 0.3, ease: 'power1.inOut' }, '-=0.4');
 
-  // ⑥ Loader slides UP and out (clean wipe, no zoom)
-  tl.to(loaderEl, {
-    yPercent: -100,
-    duration: 0.75,
+  // 5. Loader wipes up (clip-path from bottom to top)
+  tl.to(loader, {
+    clipPath: 'inset(0 0 100% 0)',
+    duration: 0.7,
     ease: 'expo.inOut'
-  }, 1.85);
+  }, '+=0.15');
 
-  // ⑦ Hero content fades in as loader exits
-  tl.to(heroContent, { opacity: 1, duration: 0.01 }, 1.9);
+  // 6. Hero nav links drop in
+  tl.to(navLinks, {
+    opacity: 1,
+    duration: 0.5, stagger: 0.07,
+    ease: 'power2.out'
+  }, '-=0.35');
 
-  tl.from(navLinks, {
-    opacity: 0, y: -8,
-    duration: 0.5, stagger: 0.06
-  }, 2.0);
-
+  // 7. Title letters slide up
   tl.to(titleLetters, {
     opacity: 1, y: 0,
-    duration: 0.65, stagger: 0.028,
+    duration: 0.6, stagger: 0.03,
     ease: 'power3.out'
-  }, 2.05);
+  }, '-=0.4');
 
+  // 8. Subtitle + scroll CTA
   tl.to([sub, cta], {
-    opacity: 1, y: 0,
-    duration: 0.5, stagger: 0.1
-  }, 2.4);
-
-  // ⑧ Cleanup
-  tl.call(function() {
-    document.body.classList.remove('is-loading');
-    loaderEl.style.display = 'none';
-    window.scrollTo(0, 0);
-    if (onComplete) onComplete();
-  }, null, 2.7);
+    opacity: 1,
+    duration: 0.5, stagger: 0.12,
+    ease: 'power2.out'
+  }, '-=0.3');
 }
 </script>
 
